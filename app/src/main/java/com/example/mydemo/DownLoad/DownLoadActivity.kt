@@ -1,0 +1,332 @@
+package com.example.mydemo.DownLoad
+
+import android.Manifest
+import android.app.Activity
+import android.content.pm.PackageManager
+import android.os.*
+import android.text.format.Formatter
+import android.util.Log
+import android.widget.TextView
+import com.example.mydemo.BaseActivity
+import com.example.mydemo.DownLoad.bean.DownLoadInfo
+import com.example.mydemo.DownLoad.db.DownLoadDbHelper
+import com.example.mydemo.DownLoad.pinterface.OnProgressListener
+import com.example.mydemo.R
+import com.example.mydemo.Util.Utils
+import kotlinx.android.synthetic.main.activity_down_load.*
+import java.io.File
+
+class DownLoadActivity : BaseActivity(), OnProgressListener {
+
+
+
+    private var filePath = DownLoaderManger.FILE_PATH_ROOT + "/" + Utils.getUserId()
+    //
+    private var downLoader: DownLoaderManger? = null
+
+    private val datas = ArrayList<DownLoadInfo>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_down_load)
+
+        val helper = DownLoadDbHelper(this)
+        downLoader = DownLoaderManger.getInstance(helper)
+
+
+        var info1 = DownLoadInfo()
+        info1.lesson_id = 0
+        info1.finished = 0
+        info1.lesson_duration = 0
+        info1.course_id = 1
+        info1.course_name = "理论上来说（赠送课程1）"
+        info1.course_cover_url = "https://staticdev.chuanghehui.com/pc-course-cover/1574229113222.png"
+        info1.course_author = "赵雷 · tittleABCDEFG"
+        info1.lesson_name = "0视频"
+        info1.lesson_url = "https://staticdev.chuanghehui.com/material/list/1555557536185/1555557536185_large.mp4"
+        info1.lesson_save_path = "1555557536185_large.mp4"
+        datas.add(info1)
+        var info2 = DownLoadInfo()
+        info2.lesson_id = 1
+        info2.finished = 0
+        info2.lesson_duration = 0
+        info2.course_id = 1
+        info2.course_name = "理论上来说（赠送课程1）"
+        info2.course_cover_url = "https://staticdev.chuanghehui.com/pc-course-cover/1574229113222.png"
+        info2.course_author = "赵雷 · tittleABCDEFG"
+        info2.lesson_name = "1视频"
+        info2.lesson_url = "https://static.chuanghehui.com/xcxmatrix/gongkaike/191011marklee6ok_large.mp4"
+        info2.lesson_save_path = "191011marklee6ok_large.mp4"
+        datas.add(info2)
+        var info3 = DownLoadInfo()
+        info3.lesson_id = 2
+        info3.finished = 0
+        info3.lesson_duration = 0
+        info3.course_id = 1
+        info3.course_name = "理论上来说（赠送课程1）"
+        info3.course_cover_url = "https://staticdev.chuanghehui.com/pc-course-cover/1574229113222.png"
+        info3.course_author = "赵雷 · tittleABCDEFG"
+        info3.lesson_name = "2视频"
+        info3.lesson_url = "https://static.chuanghehui.com/material2/1545887239/1545887239_large.mp4"
+        info3.lesson_save_path = "1545887239_large.mp4"
+        datas.add(info3)
+
+
+        for (info in datas) {
+            var temInfo = downLoader!!.queryDataById(info.lesson_id, info.course_id)
+            if (temInfo != null){
+                Log.i("111",temInfo.toString())
+                temInfo as DownLoadInfo
+                if(temInfo.lesson_id == info.lesson_id) {
+
+                    info.lesson_id = temInfo.lesson_id
+                    info.lesson_name = temInfo.lesson_name
+                    info.lesson_duration = temInfo.lesson_duration
+                    info.lesson_size = temInfo.lesson_size
+
+                    info.course_id = temInfo.course_id
+                    info.course_name = temInfo.course_name
+                    info.course_cover_url = temInfo.course_cover_url
+                    info.course_author = temInfo.course_author
+
+                    info.finished = temInfo.finished
+                    info.lesson_url = temInfo.lesson_url
+                    info.lesson_save_path = temInfo.lesson_save_path
+                    info.downLoad_state = temInfo.downLoad_state
+                }
+            }
+
+        }
+
+        lv.adapter = DownLoadAdapter(this, datas) {
+
+            if (requestStorage(this)) {
+
+                if(it.downLoad_state != 4){
+                    downLoader?.download(it)
+                }
+
+            }
+
+        }
+
+
+        if (requestStorage(this)) {
+            tv_mem.text = "${Formatter.formatFileSize(
+                baseContext,
+                getUsedMemory(filePath)
+            )} / ${getMemoryInfo(Environment.getExternalStorageDirectory())}"
+        }
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        downLoader?.registerObserver(this)
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        downLoader?.removeObserver(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        downLoader?.destory()
+
+
+    }
+
+    @Synchronized
+    private fun setBean(bean: DownLoadInfo?) {
+        if (bean == null) {
+            return
+        }
+        var index = -1
+        for (i in datas.indices) {
+            if (bean.lesson_url == datas[i].lesson_url) {
+                index = i
+            }
+        }
+
+        setText(index, bean)
+    }
+
+    private fun setText(position: Int, entity: DownLoadInfo?) {
+        if (position != -1) {
+            val contentView = lv.getChildAt(position)//核心方法
+            val tvDown = contentView.findViewById(R.id.tv_pro) as TextView
+            when (entity!!.downLoad_state) {
+                DownLoaderManger.STATE_START// 开始下载
+                -> {
+//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
+                    tvDown.text = "开始下载"
+                }
+                DownLoaderManger.STATE_WAITING// 准备下载
+                -> {
+//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
+                    tvDown.text = "准备下载"
+                }
+                DownLoaderManger.STATE_DOWNLOADING// 下载中
+                -> {
+//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
+                    tvDown.text = "下载中"
+                    if (entity.lesson_size > 0) {
+                        tvDown.append("${entity.finished * 100 / entity.lesson_size} %")
+                    }
+                }
+                DownLoaderManger.STATE_PAUSED// 暂停
+                -> {
+//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.text_light))
+                    tvDown.text = "已暂停，点击继续下载"
+                }
+                DownLoaderManger.STATE_DOWNLOADED// 下载完毕
+                -> {
+//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
+                    tvDown.text = "下载完毕"
+                }
+                DownLoaderManger.STATE_ERROR// 下载失败
+                -> {
+//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
+                    tvDown.text = "下载失败"
+                }
+                DownLoaderManger.STATE_DELETE// 删除成功
+                -> {
+                }
+            }
+        }
+    }
+
+
+    override fun onPrepare(bean: DownLoadInfo?) {
+        setBean(bean)
+    }
+
+    override fun onStart(bean: DownLoadInfo?) {
+        setBean(bean)
+    }
+
+    override fun onProgress(bean: DownLoadInfo?) {
+        Log.i("111","onProgress ${bean?.finished}")
+        setBean(bean)
+    }
+
+    override fun onStop(bean: DownLoadInfo?) {
+        setBean(bean)
+    }
+
+    override fun onFinish(bean: DownLoadInfo?) {
+        Log.i("111","onFinish ${bean?.finished}")
+        setBean(bean)
+    }
+
+    override fun onError(bean: DownLoadInfo?) {
+        setBean(bean)
+    }
+
+    override fun onDelete(bean: DownLoadInfo?) {
+        setBean(bean)
+    }
+
+
+
+    /**
+     * 获取下载长度
+     *
+     * @param downloadUrl
+     * @return
+     */
+//    private fun download(info: DownLoadInfo) {
+//        Thread {
+//            val mClient = OkHttpClient()
+//            val request = Request.Builder()
+//                .url(info.lesson_url).get()
+//                .build()
+//            try {
+//                val response = mClient.newCall(request).execute()
+//                if (response != null && response.isSuccessful) {
+//                    var contentLength = if (response.body() == null) 0 else response.body()!!.contentLength()
+//                    response.close()
+//                    info.lesson_size = contentLength
+//
+//                    Log.i("111", "contentLength = $contentLength")
+//
+//                    var msg = Message()
+//                    msg.obj = info
+//                    mHandler.sendMessage(msg)
+//                }
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                Log.i("111", "e.printStackTrace() = ${e.printStackTrace()}")
+//            }
+//
+//        }.start()
+//    }
+
+
+    private fun requestStorage(activity: Activity): Boolean {
+        if (afterM()) {
+            val hasPermission = activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (hasPermission != PackageManager.PERMISSION_GRANTED) {
+                activity.requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 100)
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun afterM(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+    }
+
+    /**
+     * 获取文件夹大小
+     * @param file File实例
+     * @return long
+     */
+    private fun getUsedMemory(filePath: String): Long {// 获取缓存大小
+
+        var size = 0L
+        val file = File(filePath)
+        if (file.exists()) {
+            try {
+                val fileList = file.listFiles()
+                for (f in fileList) {
+                    if (f.isDirectory) {
+                        size += getUsedMemory(f.path)
+                    } else {
+                        size += f.length()
+                    }
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        return size
+    }
+
+
+    /**
+     * 根据路径获取内存状态
+     * @param path
+     * @return
+     */
+    private fun getMemoryInfo(path: File): String {
+        // 获得一个磁盘状态对象
+        val stat = StatFs(path.path)
+        val blockSize = stat.blockSizeLong   // 获得一个扇区的大小
+        val totalBlocks = stat.blockCountLong   // 获得扇区的总数
+        val availableBlocks = stat.availableBlocksLong   // 获得可用的扇区数量
+        // 总空间
+        val totalMemory = Formatter.formatFileSize(this, totalBlocks * blockSize)
+        // 可用空间
+        val availableMemory = Formatter.formatFileSize(this, availableBlocks * blockSize)
+
+        return availableMemory
+    }
+
+
+}
