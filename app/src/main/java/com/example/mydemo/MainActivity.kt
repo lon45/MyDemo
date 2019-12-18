@@ -29,20 +29,7 @@ class MainActivity : BaseActivity() {
         }
 
 
-
-
-
     }
 
-    fun getPriceStr(price:Int) : String{//分
-        var priceStr = ""
-        if((price % 100) == 0){//整元
-            priceStr = "${price / 100}"
-        } else {//有角分
-            priceStr = String.format("%1.2f", price.toFloat() / 100)
 
-        }
-        Log.i("111",priceStr)
-        return priceStr
-    }
 }
