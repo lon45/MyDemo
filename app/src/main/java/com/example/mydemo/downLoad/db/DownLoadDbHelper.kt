@@ -1,14 +1,12 @@
-package com.app.chuanghehui.downLoad.db
+package com.example.mydemo.downLoad.db
 
-import android.app.DownloadManager
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.app.chuanghehui.commom.utils.UserController
-import com.app.chuanghehui.commom.utils.Utils
-import com.app.chuanghehui.downLoad.DownLoaderManger
-import com.app.chuanghehui.downLoad.bean.DownLoadInfo
+import com.example.mydemo.downLoad.bean.DownLoadInfo
+import com.example.mydemo.downLoad.DownLoaderManger
+import com.example.mydemo.util.Utils
 
 
 /**
@@ -16,7 +14,7 @@ import com.app.chuanghehui.downLoad.bean.DownLoadInfo
  *author: hxc
  * test
  */
-class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserController.loginBean.user.id + "download.db", null, 1) {
+class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, Utils.getUserId() + "download.db", null, 1) {
 
     //课时信息
     private val LESSON_ID = "lesson_id"//课时id
@@ -49,9 +47,11 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
 
     override fun onCreate(db: SQLiteDatabase?) {
 
-        db?.execSQL("create table if not exists $DOWNLOAD_TABLE ($LESSON_ID integer,$LESSON_NAME varchar,$LESSON_DURATION varchar,$LESSON_SIZE integer,$LESSON_TYPE varchar,$LESSON_CHAPTER integer," +
-                "$COURSE_ID integer,$COURSE_NAME varchar,$COURSE_COVER_URL varchar,$COURSE_AUTHOR varchar,$COURSE_CHAPTER_NUM integer," +
-                "$FINISHED integer,$LESSON_URL varchar,$LESSON_SAVE_PATH varchar,$DOWNLOAD_STATE integer,$SHARE_QR varchar,$SHARE_URL varchar,$DOWNLOAD_UPDATE_TIME integer)")
+        db?.execSQL(
+            "create table if not exists $DOWNLOAD_TABLE ($LESSON_ID integer,$LESSON_NAME varchar,$LESSON_DURATION varchar,$LESSON_SIZE integer,$LESSON_TYPE varchar,$LESSON_CHAPTER integer," +
+                    "$COURSE_ID integer,$COURSE_NAME varchar,$COURSE_COVER_URL varchar,$COURSE_AUTHOR varchar,$COURSE_CHAPTER_NUM integer," +
+                    "$FINISHED integer,$LESSON_URL varchar,$LESSON_SAVE_PATH varchar,$DOWNLOAD_STATE integer,$SHARE_QR varchar,$SHARE_URL varchar,$DOWNLOAD_UPDATE_TIME integer)"
+        )
 
     }
 
@@ -66,7 +66,16 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
     @Synchronized
     fun isExistData(db: SQLiteDatabase, info: DownLoadInfo): Boolean {
 
-        val cursor = db.query(DOWNLOAD_TABLE, null, "$LESSON_ID=? and $LESSON_TYPE=?", arrayOf(info.lesson_id.toString(), info.lesson_type), null, null, null, null)
+        val cursor = db.query(
+            DOWNLOAD_TABLE,
+            null,
+            "$LESSON_ID=? and $LESSON_TYPE=?",
+            arrayOf(info.lesson_id.toString(), info.lesson_type),
+            null,
+            null,
+            null,
+            null
+        )
         val exist = cursor.moveToNext()
         cursor.close()
         return exist
@@ -77,7 +86,16 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
     @Synchronized
     fun queryDownLoadDataByNew(db: SQLiteDatabase): DownLoadInfo? {
 
-        val cursor = db.query(DOWNLOAD_TABLE, null, "$DOWNLOAD_STATE=?", arrayOf(DownLoaderManger.STATE_DOWNLOADING.toString()), null, null, null, null)
+        val cursor = db.query(
+            DOWNLOAD_TABLE,
+            null,
+            "$DOWNLOAD_STATE=?",
+            arrayOf(DownLoaderManger.STATE_DOWNLOADING.toString()),
+            null,
+            null,
+            null,
+            null
+        )
         var info: DownLoadInfo? = null
         if (cursor != null) {
             if (cursor.moveToNext()) {
@@ -106,8 +124,17 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
             cursor.close()
         }
 
-        if(info == null) {
-            val cursor = db.query(DOWNLOAD_TABLE, null, "$DOWNLOAD_STATE =?", arrayOf(DownLoaderManger.STATE_PAUSED.toString()), null, null, "$DOWNLOAD_UPDATE_TIME desc", null)
+        if (info == null) {
+            val cursor = db.query(
+                DOWNLOAD_TABLE,
+                null,
+                "$DOWNLOAD_STATE =?",
+                arrayOf(DownLoaderManger.STATE_PAUSED.toString()),
+                null,
+                null,
+                "$DOWNLOAD_UPDATE_TIME desc",
+                null
+            )
             if (cursor != null) {
                 if (cursor.moveToNext()) {
                     info = DownLoadInfo()
@@ -145,7 +172,16 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
     @Synchronized
     fun queryDownLoadDataByLessonId(db: SQLiteDatabase, lesson_id: Int, lesson_type: String): DownLoadInfo? {
 
-        val cursor = db.query(DOWNLOAD_TABLE, null, "$LESSON_ID=? and $LESSON_TYPE=?", arrayOf(lesson_id.toString(), lesson_type), null, null, null, null)
+        val cursor = db.query(
+            DOWNLOAD_TABLE,
+            null,
+            "$LESSON_ID=? and $LESSON_TYPE=?",
+            arrayOf(lesson_id.toString(), lesson_type),
+            null,
+            null,
+            null,
+            null
+        )
         var info: DownLoadInfo? = null
         if (cursor != null) {
             if (cursor.moveToNext()) {
@@ -181,7 +217,8 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
     //查询该某个课程所有的数据
     @Synchronized
     fun queryDownLoadDataByCourseId(db: SQLiteDatabase, course_id: String): ArrayList<DownLoadInfo> {
-        val cursor = db.query(DOWNLOAD_TABLE, null, "$COURSE_ID=?", arrayOf(course_id), null, null, "$LESSON_CHAPTER asc", null)
+        val cursor =
+            db.query(DOWNLOAD_TABLE, null, "$COURSE_ID=?", arrayOf(course_id), null, null, "$LESSON_CHAPTER asc", null)
         val list = ArrayList<DownLoadInfo>()
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -259,7 +296,19 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
     @Synchronized
     fun querySumDownloading(db: SQLiteDatabase): Int {
         var num = 0
-        val cursor = db.query(DOWNLOAD_TABLE, null, "$DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ?", arrayOf(DownLoaderManger.STATE_DOWNLOADING.toString(), DownLoaderManger.STATE_WAITING.toString(), DownLoaderManger.STATE_PAUSED.toString()), null, null, null)
+        val cursor = db.query(
+            DOWNLOAD_TABLE,
+            null,
+            "$DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ?",
+            arrayOf(
+                DownLoaderManger.STATE_DOWNLOADING.toString(),
+                DownLoaderManger.STATE_WAITING.toString(),
+                DownLoaderManger.STATE_PAUSED.toString()
+            ),
+            null,
+            null,
+            null
+        )
         if (cursor != null) {
             num = cursor.count
         }
@@ -272,7 +321,20 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
     @Synchronized
     fun queryDataDownloading(db: SQLiteDatabase): ArrayList<DownLoadInfo> {
 
-        val cursor = db.query(DOWNLOAD_TABLE, null, "$DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ?", arrayOf(DownLoaderManger.STATE_DOWNLOADING.toString(), DownLoaderManger.STATE_WAITING.toString(), DownLoaderManger.STATE_PAUSED.toString(), DownLoaderManger.STATE_START.toString()), null, null, null)
+        val cursor = db.query(
+            DOWNLOAD_TABLE,
+            null,
+            "$DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ?",
+            arrayOf(
+                DownLoaderManger.STATE_DOWNLOADING.toString(),
+                DownLoaderManger.STATE_WAITING.toString(),
+                DownLoaderManger.STATE_PAUSED.toString(),
+                DownLoaderManger.STATE_START.toString()
+            ),
+            null,
+            null,
+            null
+        )
         val list = ArrayList<DownLoadInfo>()
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -311,7 +373,15 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
     @Synchronized
     fun queryDataWaiting(db: SQLiteDatabase): ArrayList<DownLoadInfo> {
 
-        val cursor = db.query(DOWNLOAD_TABLE, null, "$DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ?", arrayOf(DownLoaderManger.STATE_DOWNLOADING.toString(), DownLoaderManger.STATE_WAITING.toString()), null, null, null)
+        val cursor = db.query(
+            DOWNLOAD_TABLE,
+            null,
+            "$DOWNLOAD_STATE = ? or $DOWNLOAD_STATE = ?",
+            arrayOf(DownLoaderManger.STATE_DOWNLOADING.toString(), DownLoaderManger.STATE_WAITING.toString()),
+            null,
+            null,
+            null
+        )
         val list = ArrayList<DownLoadInfo>()
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -350,7 +420,15 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
     @Synchronized
     fun queryDataFinish(db: SQLiteDatabase): ArrayList<DownLoadInfo> {
 
-        val cursor = db.query(DOWNLOAD_TABLE, null, "$DOWNLOAD_STATE = ?", arrayOf(DownLoaderManger.STATE_DOWNLOADED.toString()), null, null, "$COURSE_ID desc")
+        val cursor = db.query(
+            DOWNLOAD_TABLE,
+            null,
+            "$DOWNLOAD_STATE = ?",
+            arrayOf(DownLoaderManger.STATE_DOWNLOADED.toString()),
+            null,
+            null,
+            "$COURSE_ID desc"
+        )
         val list = ArrayList<DownLoadInfo>()
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -429,7 +507,12 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
         values.put(DOWNLOAD_STATE, info.downLoad_state)
         values.put(DOWNLOAD_UPDATE_TIME, System.currentTimeMillis())
 
-        db.update(DOWNLOAD_TABLE, values, "$LESSON_ID=? and $LESSON_TYPE=?", arrayOf(info.lesson_id.toString(), info.lesson_type))
+        db.update(
+            DOWNLOAD_TABLE,
+            values,
+            "$LESSON_ID=? and $LESSON_TYPE=?",
+            arrayOf(info.lesson_id.toString(), info.lesson_type)
+        )
     }
 
     /**
@@ -437,7 +520,11 @@ class DownLoadDbHelper(mContext: Context) : SQLiteOpenHelper(mContext, UserContr
      */
     @Synchronized
     fun deleteDownLoadData(db: SQLiteDatabase, info: DownLoadInfo) {
-        db.delete(DOWNLOAD_TABLE, "$LESSON_ID=? and $LESSON_TYPE=?", arrayOf(info.lesson_id.toString(), info.lesson_type))
+        db.delete(
+            DOWNLOAD_TABLE,
+            "$LESSON_ID=? and $LESSON_TYPE=?",
+            arrayOf(info.lesson_id.toString(), info.lesson_type)
+        )
     }
 
     /**

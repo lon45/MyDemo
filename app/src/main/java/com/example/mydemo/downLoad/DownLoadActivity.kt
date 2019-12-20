@@ -1,4 +1,4 @@
-package com.example.mydemo.DownLoad
+package com.example.mydemo.downLoad
 
 import android.Manifest
 import android.app.Activity
@@ -8,11 +8,11 @@ import android.text.format.Formatter
 import android.util.Log
 import android.widget.TextView
 import com.example.mydemo.BaseActivity
-import com.example.mydemo.DownLoad.bean.DownLoadInfo
-import com.example.mydemo.DownLoad.db.DownLoadDbHelper
-import com.example.mydemo.DownLoad.pinterface.OnProgressListener
+import com.example.mydemo.downLoad.bean.DownLoadInfo
+import com.example.mydemo.downLoad.pinterface.OnProgressListener
 import com.example.mydemo.R
-import com.example.mydemo.Util.Utils
+import com.example.mydemo.downLoad.db.DownLoadDbHelper
+import com.example.mydemo.util.Utils
 import kotlinx.android.synthetic.main.activity_down_load.*
 import java.io.File
 
@@ -43,7 +43,7 @@ class DownLoadActivity : BaseActivity(), OnProgressListener {
         info1.course_cover_url = "https://staticdev.chuanghehui.com/pc-course-cover/1574229113222.png"
         info1.course_author = "赵雷 · tittleABCDEFG"
         info1.lesson_name = "0视频"
-        info1.lesson_url = "https://staticdev.chuanghehui.com/material/list/1555557536185/1555557536185_large.mp4"
+        info1.lesson_url = "http://vfx.mtime.cn/Video/2019/03/21/mp4/190321153853126488.mp4"
         info1.lesson_save_path = "1555557536185_large.mp4"
         datas.add(info1)
         var info2 = DownLoadInfo()
@@ -55,7 +55,7 @@ class DownLoadActivity : BaseActivity(), OnProgressListener {
         info2.course_cover_url = "https://staticdev.chuanghehui.com/pc-course-cover/1574229113222.png"
         info2.course_author = "赵雷 · tittleABCDEFG"
         info2.lesson_name = "1视频"
-        info2.lesson_url = "https://static.chuanghehui.com/xcxmatrix/gongkaike/191011marklee6ok_large.mp4"
+        info2.lesson_url = "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4"
         info2.lesson_save_path = "191011marklee6ok_large.mp4"
         datas.add(info2)
         var info3 = DownLoadInfo()
@@ -67,7 +67,7 @@ class DownLoadActivity : BaseActivity(), OnProgressListener {
         info3.course_cover_url = "https://staticdev.chuanghehui.com/pc-course-cover/1574229113222.png"
         info3.course_author = "赵雷 · tittleABCDEFG"
         info3.lesson_name = "2视频"
-        info3.lesson_url = "https://static.chuanghehui.com/material2/1545887239/1545887239_large.mp4"
+        info3.lesson_url = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4"
         info3.lesson_save_path = "1545887239_large.mp4"
         datas.add(info3)
 
@@ -328,5 +328,54 @@ class DownLoadActivity : BaseActivity(), OnProgressListener {
         return availableMemory
     }
 
+
+
+    //一些视频音频的链接
+
+//    驯龙高手http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4
+//
+//    《紧急救援》
+//
+//    http://vfx.mtime.cn/Video/2019/03/21/mp4/190321153853126488.mp4
+//
+//    玩具总动员
+//
+//    http://vfx.mtime.cn/Video/2019/03/19/mp4/190319222227698228.mp4
+//
+//    《叶问4》先行预告甄子丹过招美
+//
+//    http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4
+//
+//    预告刘德华对决古天
+//
+//    http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4
+//
+//    差不多够用了
+//
+//    http://vfx.mtime.cn/Video/2019/03/18/mp4/190318214226685784.mp4
+//
+//    http://vfx.mtime.cn/Video/2019/03/19/mp4/190319104618910544.mp4
+//
+//    http://vfx.mtime.cn/Video/2019/03/19/mp4/190319125415785691.mp4
+//
+//    http://vfx.mtime.cn/Video/2019/03/17/mp4/190317150237409904.mp4
+//
+//    http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4
+//
+//    http://vfx.mtime.cn/Video/2019/03/14/mp4/190314102306987969.mp4
+//
+//    http://vfx.mtime.cn/Video/2019/03/13/mp4/190313094901111138.mp4
+//
+//    http://vfx.mtime.cn/Video/2019/03/12/mp4/190312143927981075.mp4
+//
+//    http://vfx.mtime.cn/Video/2019/03/12/mp4/190312083533415853.mp4
+//
+//    http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4
+//
+//    最后来一张图片的地址
+//
+//    http://pic37.nipic.com/20140113/8800276_184927469000_2.png
+//   http://music.163.com/song/media/outer/url?id=1402851948.mp3
+    //http://music.163.com/song/media/outer/url?id=32703006.mp3
 
 }

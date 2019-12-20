@@ -1,4 +1,4 @@
-package com.example.mydemo.Util
+package com.example.mydemo.util
 
 /**
  * Created by Ys on 2017/7/24.

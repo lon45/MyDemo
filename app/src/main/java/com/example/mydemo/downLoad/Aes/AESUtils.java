@@ -1,12 +1,11 @@
-package com.app.chuanghehui.downLoad.Aes;
-
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
+package com.example.mydemo.downLoad.Aes;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 
 public class AESUtils {
 

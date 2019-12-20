@@ -16,6 +16,7 @@
             android:networkSecurityConfig="@xml/network_security_config"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
+            android:name=".MyApp"
             android:theme="@style/AppTheme">
         <activity
                 android:name=".MainActivity">
@@ -26,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".countdown.CountDownTimerActivity"></activity>
-        <activity android:name=".DownLoad.DownLoadActivity"></activity>
+        <activity android:name=".downLoad.DownLoadActivity"></activity>
 
     </application>
 

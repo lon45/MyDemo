@@ -1,6 +1,5 @@
-package com.app.chuanghehui.downLoad.bean
+package com.example.mydemo.downLoad.bean
 
-import com.app.chuanghehui.downLoad.DownLoaderManger
 import java.io.Serializable
 
 /**

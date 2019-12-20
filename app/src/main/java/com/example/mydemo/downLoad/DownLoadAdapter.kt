@@ -1,14 +1,13 @@
-package com.example.mydemo.DownLoad
+package com.example.mydemo.downLoad
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mydemo.DownLoad.bean.DownLoadInfo
+import com.example.mydemo.downLoad.bean.DownLoadInfo
 import com.example.mydemo.R
-import com.example.mydemo.Util.Utils
+import com.example.mydemo.util.Utils
 import kotlinx.android.synthetic.main.item_down_load.view.*
 
 /**

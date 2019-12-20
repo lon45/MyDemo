@@ -1,6 +1,4 @@
-package com.app.chuanghehui.downLoad.Aes;
-
-import com.app.chuanghehui.commom.utils.Utils;
+package com.example.mydemo.downLoad.Aes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,7 +7,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.RandomAccessFile;
 
-import static com.app.chuanghehui.commom.ConstantKt.DIR_CHE;
+import static com.example.mydemo.util.ConstantKt.DIR_CHE;
 
 
 public class FileEnDecryptManager {

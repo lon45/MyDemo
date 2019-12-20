@@ -1,6 +1,6 @@
-package com.example.mydemo.DownLoad.pinterface;
+package com.example.mydemo.downLoad.pinterface;
 
-import com.example.mydemo.DownLoad.bean.DownLoadInfo;
+import com.example.mydemo.downLoad.bean.DownLoadInfo;
 
 //下载进度接口
 public interface OnProgressListener {

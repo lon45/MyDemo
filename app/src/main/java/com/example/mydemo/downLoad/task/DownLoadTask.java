@@ -1,13 +1,12 @@
-package com.example.mydemo.DownLoad.task;
+package com.example.mydemo.downLoad.task;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
-
-import android.util.Log;
-import com.example.mydemo.DownLoad.DownLoaderManger;
-import com.example.mydemo.DownLoad.bean.DownLoadInfo;
-import com.example.mydemo.DownLoad.db.DownLoadDbHelper;
+import com.example.mydemo.downLoad.bean.DownLoadInfo;
+import com.example.mydemo.downLoad.Aes.FileEnDecryptManager;
+import com.example.mydemo.downLoad.DownLoaderManger;
+import com.example.mydemo.downLoad.db.DownLoadDbHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class DownLoadTask implements Runnable {
         this.helper = helper;
         this.db = helper.getReadableDatabase();
         this.listener = listener;
-        info.setDownLoad_state(DownLoaderManger.STATE_DOWNLOADING);
+//        info.setDownLoad_state(DownLoaderManger.STATE_DOWNLOADING);
         this.mTaskMap = mTaskMap;
     }
 
@@ -49,13 +48,18 @@ public class DownLoadTask implements Runnable {
     public void run() {
         // 等待中就暂停了
         if (getInfo().getDownLoad_state() == DownLoaderManger.STATE_PAUSED) {
-            getInfo().setDownLoad_state(DownLoaderManger.STATE_PAUSED);
-            helper.updateDownLoadData(db, getInfo());
+//            getInfo().setDownLoad_state(DownLoaderManger.STATE_PAUSED);
+//            helper.updateDownLoadData(db, getInfo());
+//            notifyDownloadStateChanged(getInfo());
+            if (mTaskMap.containsKey(getInfo().getLesson_url())) {
+                mTaskMap.remove(getInfo().getLesson_url());
+            }
 //            db.close();
             return;
         } else if (getInfo().getDownLoad_state() == DownLoaderManger.STATE_DELETE) {// 等待中就删除直接回调界面，然后直接返回
-            getInfo().setDownLoad_state(DownLoaderManger.STATE_DELETE);
-            notifyDownloadStateChanged(getInfo());
+//            getInfo().setDownLoad_state(DownLoaderManger.STATE_DELETE);
+//            helper.updateDownLoadData(db, getInfo());
+//            notifyDownloadStateChanged(getInfo());
             if (mTaskMap.containsKey(getInfo().getLesson_url())) {
                 mTaskMap.remove(getInfo().getLesson_url());
             }
@@ -76,9 +80,9 @@ public class DownLoadTask implements Runnable {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        Log.i("111","info.getLesson_save_path() = "+info.getLesson_save_path());
-        File file = new File(DownLoaderManger.FILE_PATH, info.getLesson_save_path());// 获取下载文件
-        Log.i("111","file = "+file.getPath());
+//            Utils.INSTANCE.log("111","info.getLesson_save_path() = "+info.getLesson_save_path());
+        File file = new File(info.getLesson_save_path());// 获取下载文件
+//            Utils.INSTANCE.log("111","file = "+file.getPath());
         if (!file.exists()) {
             // 如果文件不存在
             info.setFinished(0);
@@ -110,32 +114,39 @@ public class DownLoadTask implements Runnable {
             connection.setConnectTimeout(3000);
             //从上次下载完成的地方下载
             //设置下载位置(从服务器上取要下载文件的某一段)
-            connection.setRequestProperty("Range", "bytes=" + compeleteSize + "-" + info.getLesson_size());//设置下载范围
+            connection.setRequestProperty("Range", "bytes=" + compeleteSize + "-");//设置下载范围// + info.getLesson_size()
             //设置文件写入位置
-//            File file = new File(DownLoaderManger.FILE_PATH, info.getFileName());
+//            File file = new File( info.getFileName());
             rwd = new RandomAccessFile(file, "rwd");
             //从文件的某一位置开始写入
             rwd.seek(compeleteSize);
 //            compeleteSize += info.getFinished();
-            if (connection.getResponseCode() == 206) {//文件部分下载，返回码为206
+//            Utils.INSTANCE.log("111","1111111 = 1"+connection.getResponseCode());
+            if (connection.getResponseCode() == 206 || connection.getResponseCode() == 200) {//文件部分下载，返回码为206
+                if(getInfo().getDownLoad_state() == DownLoaderManger.STATE_START){//判断是开始状态  不然由于联网状态，暂停会被打断
                 InputStream is = connection.getInputStream();
                 byte[] buffer = new byte[1024 * 4];
                 int len;
                 info.setDownLoad_state(DownLoaderManger.STATE_DOWNLOADING);
                 helper.updateDownLoadData(db, info);
+                notifyDownloadStateChanged(getInfo());
+                int count = 0; //计数，每5次刷新一次界面，不然会很卡
                 while ((len = is.read(buffer)) != -1) {
                     if (getInfo().getDownLoad_state() == DownLoaderManger.STATE_PAUSED) {
-                        getInfo().setDownLoad_state(DownLoaderManger.STATE_PAUSED);
-                        helper.updateDownLoadData(db, info);
-//                        db.close();
-                        return;
-                    } else if (getInfo().getDownLoad_state() == DownLoaderManger.STATE_DELETE) {// 等待中就删除直接回调界面，然后直接返回
-                        getInfo().setDownLoad_state(DownLoaderManger.STATE_DELETE);
-                        notifyDownloadStateChanged(getInfo());
+//                        getInfo().setDownLoad_state(DownLoaderManger.STATE_PAUSED);
+//                        helper.updateDownLoadData(db, info);
+//                        notifyDownloadStateChanged(getInfo());
                         if (mTaskMap.containsKey(getInfo().getLesson_url())) {
                             mTaskMap.remove(getInfo().getLesson_url());
                         }
-//                        db.close();
+                        return;
+                    } else if (getInfo().getDownLoad_state() == DownLoaderManger.STATE_DELETE) {// 等待中就删除直接回调界面，然后直接返回
+//                        getInfo().setDownLoad_state(DownLoaderManger.STATE_DELETE);
+//                        helper.updateDownLoadData(db, info);
+//                        notifyDownloadStateChanged(getInfo());
+                        if (mTaskMap.containsKey(getInfo().getLesson_url())) {
+                            mTaskMap.remove(getInfo().getLesson_url());
+                        }
                         return;
                     }
                     DownLoaderManger.down_bean = info;
@@ -146,7 +157,11 @@ public class DownLoadTask implements Runnable {
                     //更新界面显示
                     info.setFinished(compeleteSize);
                     helper.updateDownLoadData(db, info);
-                    notifyDownloadStateChanged(info);
+                    count ++;
+                    if(count == 5){
+                        count = 0;
+                        notifyDownloadStateChanged(info);
+                    }
                 }
                 //下载完成
                 if (info.getLesson_size() == info.getFinished()) {
@@ -155,7 +170,9 @@ public class DownLoadTask implements Runnable {
                     if (mTaskMap.containsKey(getInfo().getLesson_url())) {
                         mTaskMap.remove(getInfo().getLesson_url());
                     }
-                    helper.updateDownLoadData(db, info);
+//                    DownLoaderManger.down_bean = null;//这个对象是用于下载中程序退出，保存状态的，下载完成不用保存
+
+//                    helper.updateDownLoadData(db, info);
                     notifyDownloadStateChanged(info);
 
 //                    db.close();
@@ -170,6 +187,7 @@ public class DownLoadTask implements Runnable {
                     file.delete();
 //                    db.close();
                 }
+             }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -185,6 +203,18 @@ public class DownLoadTask implements Runnable {
                 e.printStackTrace();
             }
         }
+        } else {//文件长度为0 提示下载错误
+            info.setDownLoad_state(DownLoaderManger.STATE_ERROR);
+            info.setFinished(0); // 错误状态需要删除文件
+            helper.updateDownLoadData(db, info);
+            if (mTaskMap.containsKey(getInfo().getLesson_url())) {
+                mTaskMap.remove(getInfo().getLesson_url());
+            }
+            notifyDownloadStateChanged(info);
+            File file = new File(info.getLesson_save_path());// 获取下载文件
+            if (file.exists()) {
+                file.delete();
+            }
         }
     }
 
@@ -236,15 +266,39 @@ public class DownLoadTask implements Runnable {
     /**
      * 当下载状态发送改变的时候调用
      */
-    private void notifyDownloadStateChanged(DownLoadInfo bean) {
-//        Log.i("111","notifyDownloadStateChanged");
+    private synchronized void notifyDownloadStateChanged(DownLoadInfo bean) {
+//        Utils.INSTANCE.log("111","notifyDownloadStateChanged");
         if (listener != null) {
-            Message message = listener.obtainMessage();
-            message.obj = bean;
-            listener.sendMessage(message);
+
+            if(bean.getDownLoad_state() == DownLoaderManger.STATE_DOWNLOADED){//下载完成的文件需要加密
+                File file = new File(info.getLesson_save_path());
+                if(file.exists()){
+                    encrypt(bean,file.getPath());
+                }
+
+            } else {
+                Message message = listener.obtainMessage();
+                message.obj = bean;
+                listener.sendMessage(message);
+            }
+
+
         }
 
     }
-
+    //视频加密
+    public void encrypt(final DownLoadInfo bean, final String FILE_PATH) {
+        if (!FileEnDecryptManager.getInstance().isEncrypt(FILE_PATH)) {
+            new Thread() {
+                public void run() {
+//                    Utils.INSTANCE.log("111","encrypt");
+                    FileEnDecryptManager.getInstance().encryptFile(FILE_PATH,bean.getLesson_type().equalsIgnoreCase("video") ? FileEnDecryptManager.VideoFile:FileEnDecryptManager.AudioFile);
+                    Message message = listener.obtainMessage();
+                    message.obj = bean;
+                    listener.sendMessage(message);
+                }
+            }.start();
+        }
+    }
 
 }

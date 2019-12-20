@@ -1,4 +1,4 @@
-package com.example.mydemo.DownLoad;
+package com.example.mydemo.downLoad;
 
 public interface UpdateUi {
     

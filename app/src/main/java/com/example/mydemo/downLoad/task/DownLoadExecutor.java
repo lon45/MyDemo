@@ -1,4 +1,4 @@
-package com.example.mydemo.DownLoad.task;
+package com.example.mydemo.downLoad.task;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
