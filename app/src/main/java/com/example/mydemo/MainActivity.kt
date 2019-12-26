@@ -69,6 +69,9 @@ class MainActivity : BaseActivity() {
 
     }
 
+    override fun onRestart() {
+        super.onRestart()
+    }
 
     //播放登录前的视频
     private fun startVideoBg() {
