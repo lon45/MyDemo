@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.mydemo.downLoad.DownLoadActivity
 import com.example.mydemo.util.Utils
 import com.example.mydemo.countdown.CountDownTimerActivity
+import com.example.mydemo.deviceInfo.DeviceActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -31,6 +32,17 @@ class MainActivity : BaseActivity() {
             var intent = Intent(this@MainActivity, DownLoadActivity::class.java)
             startActivity(intent)
         }
+
+        tv_device.setOnClickListener {
+            if(!Utils.isFastDoubleClick()){
+                return@setOnClickListener
+            }
+            //设备
+            var intent = Intent(this@MainActivity, DeviceActivity::class.java)
+            startActivity(intent)
+
+        }
+
 
 
     }

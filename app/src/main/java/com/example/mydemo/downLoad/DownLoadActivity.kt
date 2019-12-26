@@ -72,31 +72,31 @@ class DownLoadActivity : BaseActivity(), OnProgressListener {
         datas.add(info3)
 
 
-        for (info in datas) {
-            var temInfo = downLoader!!.queryDataById(info.lesson_id, info.course_id)
-            if (temInfo != null){
-                Log.i("111",temInfo.toString())
-                temInfo as DownLoadInfo
-                if(temInfo.lesson_id == info.lesson_id) {
-
-                    info.lesson_id = temInfo.lesson_id
-                    info.lesson_name = temInfo.lesson_name
-                    info.lesson_duration = temInfo.lesson_duration
-                    info.lesson_size = temInfo.lesson_size
-
-                    info.course_id = temInfo.course_id
-                    info.course_name = temInfo.course_name
-                    info.course_cover_url = temInfo.course_cover_url
-                    info.course_author = temInfo.course_author
-
-                    info.finished = temInfo.finished
-                    info.lesson_url = temInfo.lesson_url
-                    info.lesson_save_path = temInfo.lesson_save_path
-                    info.downLoad_state = temInfo.downLoad_state
-                }
-            }
-
-        }
+//        for (info in datas) {
+//            var temInfo = downLoader!!.queryDataById(info.lesson_id, info.course_id)
+//            if (temInfo != null){
+//                Log.i("111",temInfo.toString())
+//                temInfo as DownLoadInfo
+//                if(temInfo.lesson_id == info.lesson_id) {
+//
+//                    info.lesson_id = temInfo.lesson_id
+//                    info.lesson_name = temInfo.lesson_name
+//                    info.lesson_duration = temInfo.lesson_duration
+//                    info.lesson_size = temInfo.lesson_size
+//
+//                    info.course_id = temInfo.course_id
+//                    info.course_name = temInfo.course_name
+//                    info.course_cover_url = temInfo.course_cover_url
+//                    info.course_author = temInfo.course_author
+//
+//                    info.finished = temInfo.finished
+//                    info.lesson_url = temInfo.lesson_url
+//                    info.lesson_save_path = temInfo.lesson_save_path
+//                    info.downLoad_state = temInfo.downLoad_state
+//                }
+//            }
+//
+//        }
 
         lv.adapter = DownLoadAdapter(this, datas) {
 
