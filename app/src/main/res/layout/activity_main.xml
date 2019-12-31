@@ -42,216 +42,242 @@
                 android:padding="10dp"/>
 
 
-                    <LinearLayout
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="220dp">
+
+            <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/bannerVP"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center_horizontal"
+                    android:clipChildren="true"/>
+
+            <LinearLayout
+                    android:id="@+id/indicatorContainerLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="horizontal">
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvCommunity"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1">
+
+                <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cvCommunity"
-                            android:layout_width="0dp"
-                            android:layout_height="150dp"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:paddingLeft="12dp"
-                                android:paddingRight="12dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="社群"
-                                        android:textColor="#373737"
-                                        android:textSize="18dp" />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="5dp"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <com.example.mydemo.views.rollingtextview.RollingTextView
-                                            android:id="@+id/rtvNum"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:paddingLeft="3dp"
-                                            android:paddingRight="3dp"
-                                            android:text="0"
-                                            android:textColor="#373737"
-                                            android:textSize="15dp"
-                                            android:textStyle="bold"
-                                            app:textBgColor="#EAEAEA" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="位加入俱乐部"
-                                            android:textColor="#8B8B8B"
-                                            android:textSize="12dp" />
-
-                                    </LinearLayout>
-
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="5dp"
-                                    android:orientation="horizontal">
-
-                                    <View
-                                        android:layout_width="0dp"
-                                        android:layout_height="1dp"
-                                        android:layout_weight="1"
-                                        android:background="#EEEEEE" />
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:background="@mipmap/icon_line_arrow" />
-
-                                    <View
-                                        android:layout_width="0dp"
-                                        android:layout_height="1dp"
-                                        android:layout_weight="1"
-                                        android:background="#EEEEEE" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1">
-
-                                    <com.example.mydemo.views.VerticalBannerView.VerticalBannerView
-                                        android:id="@+id/vbvCommunity"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent">
-
-
-                                    </com.example.mydemo.views.VerticalBannerView.VerticalBannerView>
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
                             android:layout_weight="1"
+                            android:gravity="center_vertical"
                             android:orientation="vertical">
 
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/cvChuangKeBang"
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="社群"
+                                android:textColor="#373737"
+                                android:textSize="18dp"/>
+
+                        <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_margin="5dp"
-                                android:layout_weight="1">
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                            <com.example.mydemo.views.rollingtextview.RollingTextView
+                                    android:id="@+id/rtvNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
+                                    android:text="0"
+                                    android:textColor="#373737"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold"
+                                    app:textBgColor="#EAEAEA"/>
 
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_marginRight="-1dp"
-                                        android:background="@mipmap/icon_ckb_bg" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="15dp"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="创客邦"
-                                            android:textColor="#373737"
-                                            android:textSize="18dp" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="1dp"
-                                            android:text="创新创业者服务对接"
-                                            android:textColor="#8B8B8B"
-                                            android:textSize="12dp" />
-
-                                    </LinearLayout>
-                                </RelativeLayout>
-
-
-                            </androidx.cardview.widget.CardView>
-
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/cvTouRongHui"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_margin="5dp"
-                                android:layout_weight="1">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-                                    <ImageView
-                                        android:layout_width="50dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_marginRight="-1dp"
-                                        android:background="@mipmap/icon_trh_bg" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="15dp"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="创新汇"
-                                            android:textColor="#373737"
-                                            android:textSize="18dp" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="1dp"
-                                            android:text="创新创业项目对接"
-                                            android:textColor="#8B8B8B"
-                                            android:textSize="12dp" />
-
-                                    </LinearLayout>
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="位加入俱乐部"
+                                    android:textColor="#8B8B8B"
+                                    android:textSize="12dp"/>
 
                         </LinearLayout>
 
+
                     </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:orientation="horizontal">
+
+                        <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#EEEEEE"/>
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@mipmap/icon_line_arrow"/>
+
+                        <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="#EEEEEE"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                        <com.example.mydemo.views.VerticalBannerView.VerticalBannerView
+                                android:id="@+id/vbvCommunity"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+
+                        </com.example.mydemo.views.VerticalBannerView.VerticalBannerView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                        android:id="@+id/cvChuangKeBang"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1">
+
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="-1dp"
+                                android:background="@mipmap/icon_ckb_bg"/>
+
+                        <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="15dp"
+                                android:orientation="vertical">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="创客邦"
+                                    android:textColor="#373737"
+                                    android:textSize="18dp"/>
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:text="创新创业者服务对接"
+                                    android:textColor="#8B8B8B"
+                                    android:textSize="12dp"/>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                        android:id="@+id/cvTouRongHui"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1">
+
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="-1dp"
+                                android:background="@mipmap/icon_trh_bg"/>
+
+                        <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="15dp"
+                                android:orientation="vertical">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="创新汇"
+                                    android:textColor="#373737"
+                                    android:textSize="18dp"/>
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:text="创新创业项目对接"
+                                    android:textColor="#8B8B8B"
+                                    android:textSize="12dp"/>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

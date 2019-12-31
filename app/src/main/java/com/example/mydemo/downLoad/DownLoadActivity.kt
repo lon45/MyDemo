@@ -11,6 +11,7 @@ import com.example.mydemo.BaseActivity
 import com.example.mydemo.downLoad.bean.DownLoadInfo
 import com.example.mydemo.downLoad.pinterface.OnProgressListener
 import com.example.mydemo.R
+import com.example.mydemo.downLoad.adapter.DownLoadAdapter
 import com.example.mydemo.downLoad.db.DownLoadDbHelper
 import com.example.mydemo.util.Utils
 import kotlinx.android.synthetic.main.activity_down_load.*
@@ -33,70 +34,99 @@ class DownLoadActivity : BaseActivity(), OnProgressListener {
         val helper = DownLoadDbHelper(this)
         downLoader = DownLoaderManger.getInstance(helper)
 
-
         var info1 = DownLoadInfo()
-        info1.lesson_id = 0
-        info1.finished = 0
+        info1.lesson_id = 1
+        info1.lesson_name = "0视频"
         info1.lesson_duration = 0
+        info1.lesson_size = 0
+        info1.lesson_type = "video"
+        info1.lesson_chapter = 0
         info1.course_id = 1
         info1.course_name = "理论上来说（赠送课程1）"
         info1.course_cover_url = "https://staticdev.chuanghehui.com/pc-course-cover/1574229113222.png"
-        info1.course_author = "赵雷 · tittleABCDEFG"
-        info1.lesson_name = "0视频"
+        info1.course_author = "XX · tittleABCDEFG"
+        info1.course_chapter_num = 3
         info1.lesson_url = "http://vfx.mtime.cn/Video/2019/03/21/mp4/190321153853126488.mp4"
-        info1.lesson_save_path = "1555557536185_large.mp4"
+        info1.finished = 0
+        info1.share_qrcode = ""
+        info1.share_url = ""
+
+        if (info1.lesson_url.isNotEmpty() && info1.lesson_url.contains("/")) {
+            info1.lesson_save_path = "${DownLoaderManger.FILE_PATH}${info1.lesson_url.substring(info1.lesson_url.lastIndexOf("/"))}"
+        }
+        info1.downLoad_state = DownLoaderManger.STATE_NONE
         datas.add(info1)
+
         var info2 = DownLoadInfo()
-        info2.lesson_id = 1
-        info2.finished = 0
+        info2.lesson_id = 2
+        info2.lesson_name = "1视频"
         info2.lesson_duration = 0
+        info2.lesson_size = 0
+        info2.lesson_type = "video"
+        info2.lesson_chapter = 1
         info2.course_id = 1
         info2.course_name = "理论上来说（赠送课程1）"
         info2.course_cover_url = "https://staticdev.chuanghehui.com/pc-course-cover/1574229113222.png"
-        info2.course_author = "赵雷 · tittleABCDEFG"
-        info2.lesson_name = "1视频"
-        info2.lesson_url = "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4"
-        info2.lesson_save_path = "191011marklee6ok_large.mp4"
+        info2.course_author = "XX · tittleABCDEFG"
+        info2.course_chapter_num = 3
+        info2.lesson_url = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4"
+        info2.finished = 0
+        info2.share_qrcode = ""
+        info2.share_url = ""
+
+        if (info2.lesson_url.isNotEmpty() && info2.lesson_url.contains("/")) {
+            info2.lesson_save_path = "${DownLoaderManger.FILE_PATH}${info2.lesson_url.substring(info2.lesson_url.lastIndexOf("/"))}"
+        }
         datas.add(info2)
+
         var info3 = DownLoadInfo()
-        info3.lesson_id = 2
-        info3.finished = 0
+        info3.lesson_id = 3
+        info3.lesson_name = "2视频"
         info3.lesson_duration = 0
+        info3.lesson_size = 0
+        info3.lesson_type = "video"
+        info3.lesson_chapter = 2
         info3.course_id = 1
         info3.course_name = "理论上来说（赠送课程1）"
         info3.course_cover_url = "https://staticdev.chuanghehui.com/pc-course-cover/1574229113222.png"
-        info3.course_author = "赵雷 · tittleABCDEFG"
-        info3.lesson_name = "2视频"
-        info3.lesson_url = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4"
-        info3.lesson_save_path = "1545887239_large.mp4"
+        info3.course_author = "XX · tittleABCDEFG"
+        info3.course_chapter_num = 3
+        info3.lesson_url = "http://vfx.mtime.cn/Video/2019/03/17/mp4/190317150237409904.mp4"
+        info3.finished = 0
+        info3.share_qrcode = ""
+        info3.share_url = ""
+
+        if (info3.lesson_url.isNotEmpty() && info3.lesson_url.contains("/")) {
+            info3.lesson_save_path = "${DownLoaderManger.FILE_PATH}${info3.lesson_url.substring(info3.lesson_url.lastIndexOf("/"))}"
+        }
         datas.add(info3)
 
 
-//        for (info in datas) {
-//            var temInfo = downLoader!!.queryDataById(info.lesson_id, info.course_id)
-//            if (temInfo != null){
-//                Log.i("111",temInfo.toString())
-//                temInfo as DownLoadInfo
-//                if(temInfo.lesson_id == info.lesson_id) {
-//
-//                    info.lesson_id = temInfo.lesson_id
-//                    info.lesson_name = temInfo.lesson_name
-//                    info.lesson_duration = temInfo.lesson_duration
-//                    info.lesson_size = temInfo.lesson_size
-//
-//                    info.course_id = temInfo.course_id
-//                    info.course_name = temInfo.course_name
-//                    info.course_cover_url = temInfo.course_cover_url
-//                    info.course_author = temInfo.course_author
-//
-//                    info.finished = temInfo.finished
-//                    info.lesson_url = temInfo.lesson_url
-//                    info.lesson_save_path = temInfo.lesson_save_path
-//                    info.downLoad_state = temInfo.downLoad_state
-//                }
-//            }
-//
-//        }
+        for (info in datas) {
+            var temInfo = downLoader!!.queryDataByLessonId(info.lesson_id,info.lesson_type)
+            if (temInfo != null){
+                Log.i("111",temInfo.toString())
+                temInfo as DownLoadInfo
+                if(temInfo.lesson_id == info.lesson_id) {
+
+                    info.lesson_id = temInfo.lesson_id
+                    info.lesson_name = temInfo.lesson_name
+                    info.lesson_duration = temInfo.lesson_duration
+                    info.lesson_size = temInfo.lesson_size
+
+                    info.course_id = temInfo.course_id
+                    info.course_name = temInfo.course_name
+                    info.course_cover_url = temInfo.course_cover_url
+                    info.course_author = temInfo.course_author
+
+                    info.finished = temInfo.finished
+                    info.lesson_url = temInfo.lesson_url
+                    info.lesson_save_path = temInfo.lesson_save_path
+                    info.downLoad_state = temInfo.downLoad_state
+                }
+            }
+
+        }
 
         lv.adapter = DownLoadAdapter(this, datas) {
 
@@ -157,40 +187,34 @@ class DownLoadActivity : BaseActivity(), OnProgressListener {
     private fun setText(position: Int, entity: DownLoadInfo?) {
         if (position != -1) {
             val contentView = lv.getChildAt(position)//核心方法
-            val tvDown = contentView.findViewById(R.id.tv_pro) as TextView
+//            val tvDown = contentView.findViewById(R.id.tv_pro) as TextView
             when (entity!!.downLoad_state) {
                 DownLoaderManger.STATE_START// 开始下载
                 -> {
-//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
-                    tvDown.text = "开始下载"
+//                    tvDown.text = "开始下载"
                 }
                 DownLoaderManger.STATE_WAITING// 准备下载
                 -> {
-//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
-                    tvDown.text = "准备下载"
+//                    tvDown.text = "准备下载"
                 }
                 DownLoaderManger.STATE_DOWNLOADING// 下载中
                 -> {
-//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
-                    tvDown.text = "下载中"
+//                    tvDown.text = "下载中"
                     if (entity.lesson_size > 0) {
-                        tvDown.append("${entity.finished * 100 / entity.lesson_size} %")
+//                        tvDown.append("${entity.finished * 100 / entity.lesson_size} %")
                     }
                 }
                 DownLoaderManger.STATE_PAUSED// 暂停
                 -> {
-//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.text_light))
-                    tvDown.text = "已暂停，点击继续下载"
+//                    tvDown.text = "已暂停，点击继续下载"
                 }
                 DownLoaderManger.STATE_DOWNLOADED// 下载完毕
                 -> {
-//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
-                    tvDown.text = "下载完毕"
+//                    tvDown.text = "下载完毕"
                 }
                 DownLoaderManger.STATE_ERROR// 下载失败
                 -> {
-//                    tvDown.setTextColor(getContext().getResources().getColor(R.color.color_main_theme))
-                    tvDown.text = "下载失败"
+//                    tvDown.text = "下载失败"
                 }
                 DownLoaderManger.STATE_DELETE// 删除成功
                 -> {
