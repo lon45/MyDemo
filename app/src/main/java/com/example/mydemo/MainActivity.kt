@@ -2,12 +2,17 @@ package com.example.mydemo
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.core.view.forEach
 import androidx.viewpager.widget.ViewPager
@@ -20,6 +25,9 @@ import com.example.mydemo.views.rollingtextview.CharOrder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_indicator.view.*
 import java.lang.ref.WeakReference
+import androidx.core.content.res.ResourcesCompat
+
+
 
 class MainActivity : BaseActivity() {
 
@@ -29,6 +37,9 @@ class MainActivity : BaseActivity() {
 
 //        var time = System.currentTimeMillis()
 //        Log.i("111","$time | ${(time/1000).toInt()}")
+        val typeface = ResourcesCompat.getFont(this, R.font.xingshu)
+        tv_progress.typeface = typeface
+        tv_progress.text = "已抢了50%;"
 
         tv_countdown.setOnClickListener {
             if (!Utils.isFastDoubleClick()) {
@@ -316,4 +327,80 @@ class MainActivity : BaseActivity() {
     //            if (vbvCommunity != null) {
 //                vbvCommunity.performSwitch()
 //            }
+
+
+
+
+
+
+
+    //webview 中 视频全屏
+
+
+//    private var mCustomView:View? = null
+//    private var mOriginalSystemUiVisibility = 0
+//    private var mOriginalOrientation = 0
+//    private var mCustomViewCallback : WebChromeClient.CustomViewCallback? = null
+//
+//    override fun onShowCustomView(view: View?, callback: WebChromeClient.CustomViewCallback?) {
+//        super.onShowCustomView(view, callback)
+//        Utils.log("111","onShowCustomView")
+//
+//        if (mCustomView != null)
+//        {
+//            onHideCustomView()
+//            return
+//        }
+//
+//        // 1. Stash the current state
+//        mCustomView = view
+//        mOriginalSystemUiVisibility = getWindow().getDecorView().getSystemUiVisibility()
+//        mOriginalOrientation = getRequestedOrientation()
+//
+//        // 2. Stash the custom view callback
+//        mCustomViewCallback = callback
+//
+//        // 3. Add the custom view to the view hierarchy
+//        val decor = getWindow().getDecorView() as FrameLayout
+//        decor.addView(mCustomView, FrameLayout.LayoutParams(
+//            ViewGroup.LayoutParams.MATCH_PARENT,
+//            ViewGroup.LayoutParams.MATCH_PARENT))
+//
+//
+//        // 4. Change the state of the window
+//        getWindow().getDecorView().setSystemUiVisibility(
+//            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+//                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+//                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+//                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+//                    View.SYSTEM_UI_FLAG_FULLSCREEN or
+//                    View.SYSTEM_UI_FLAG_IMMERSIVE)
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+//
+//    }
+//
+//    override fun onHideCustomView() {
+//        super.onHideCustomView()
+//        Utils.log("111","onHideCustomView")
+//
+//        // 1. Remove the custom view
+//        val decor = getWindow().getDecorView() as FrameLayout
+//        decor.removeView(mCustomView)
+//        mCustomView = null
+//
+//        // 2. Restore the state to it's original form
+//        getWindow().getDecorView()
+//            .setSystemUiVisibility(mOriginalSystemUiVisibility)
+//        setRequestedOrientation(mOriginalOrientation)
+//
+//        // 3. Call the custom view callback
+//        mCustomViewCallback?.onCustomViewHidden()
+//        mCustomViewCallback = null
+//
+//    }
+
+
+
+
+
 }
