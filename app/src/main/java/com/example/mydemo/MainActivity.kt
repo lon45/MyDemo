@@ -1,12 +1,17 @@
 package com.example.mydemo
 
+import android.animation.Animator
+import android.animation.TimeAnimator
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -102,6 +107,8 @@ class MainActivity : BaseActivity() {
 
         viewpager()
     }
+
+
 
     override fun onRestart() {
         super.onRestart()
@@ -272,7 +279,7 @@ class MainActivity : BaseActivity() {
 //        bannerHandler.sendEmptyMessageDelayed(0, 5000)
 //        bannerMove = true
     }
-
+    var anim:ValueAnimator? = null
     override fun onResume() {
         super.onResume()
 
@@ -283,12 +290,34 @@ class MainActivity : BaseActivity() {
 //        if (bannerMove) {
             bannerHandler.sendEmptyMessageDelayed(0, 5000)
 //        }
+
+        if(anim == null){
+            anim = ValueAnimator.ofFloat(0f,1f)
+
+            anim!!.addUpdateListener {
+                view_anim.visibility = View.VISIBLE
+                Log.i("anim","${it.animatedValue} | ${view_anim.width}")
+                it.animatedValue
+                //设置View的显示区域，坐标是自身
+                var tmp = Rect(0, 0, (it.animatedValue.toString().toFloat() * view_anim.width).toInt(), view_anim.height)
+                view_anim.clipBounds = tmp
+
+            }
+            anim!!.duration = 3000
+            anim!!.start()
+        }
+
     }
 
     override fun onPause() {
         super.onPause()
         bannerHandler.removeCallbacksAndMessages(null)
         mViewpagerHandler.removeCallbacksAndMessages(null)
+
+        if(anim!= null && anim!!.isRunning){
+            anim!!.cancel()
+            anim = null
+        }
     }
 
     inner class MyViewpagerHandler(activity: Activity) : Handler() {
