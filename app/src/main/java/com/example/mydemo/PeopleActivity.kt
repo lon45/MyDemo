@@ -107,8 +107,8 @@ class PeopleActivity : AppCompatActivity(), View.OnClickListener, MyRotateAnimat
 
             rotateAnim = MyRotateAnimation(cX, cY, MyRotateAnimation.ROTATE_DECREASE)
             if (rotateAnim != null) {
-                rotateAnim!!.setInterpolatedTimeListener(this)
-                rotateAnim!!.fillAfter = true
+                rotateAnim.setInterpolatedTimeListener(this)
+                rotateAnim.fillAfter = true
                 rl_manbody_self!!.startAnimation(rotateAnim)
             }
         } else {
@@ -117,8 +117,8 @@ class PeopleActivity : AppCompatActivity(), View.OnClickListener, MyRotateAnimat
 
             rotateAnim = MyRotateAnimation(cX, cY, MyRotateAnimation.ROTATE_DECREASE)
             if (rotateAnim != null) {
-                rotateAnim!!.setInterpolatedTimeListener(this)
-                rotateAnim!!.fillAfter = true
+                rotateAnim.setInterpolatedTimeListener(this)
+                rotateAnim.fillAfter = true
                 rl_womanbody_self!!.startAnimation(rotateAnim)
             }
         }
@@ -264,8 +264,8 @@ class PeopleActivity : AppCompatActivity(), View.OnClickListener, MyRotateAnimat
             val bmW = bm.width
             val bmH = bm.height
 
-            val w = rl_manbody_self!!.width
-            val h = rl_manbody_self!!.height
+            val w = rl_manbody_self.width
+            val h = rl_manbody_self.height
             Log.i("111", "h = $h|$bmH")
             val percention = h.toFloat() / bmH.toFloat()
             Log.i("111", "percention = $percention")
