@@ -40,7 +40,13 @@
                 android:text="设备"
                 android:textColor="@color/white"
                 android:padding="10dp"/>
-
+        <TextView
+                android:id="@+id/tv_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="根据色值判断点击事件"
+                android:textColor="@color/white"
+                android:padding="10dp"/>
         <TextView
                 android:id="@+id/view_anim"
                 android:layout_width="wrap_content"

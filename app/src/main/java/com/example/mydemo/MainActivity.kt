@@ -74,7 +74,14 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
 
         }
-
+        //根据色值判断点击事件
+        tv_people.setOnClickListener {
+            if (!Utils.isFastDoubleClick()) {
+                return@setOnClickListener
+            }
+            var intent = Intent(this@MainActivity, PeopleActivity::class.java)
+            startActivity(intent)
+        }
 
 
         videoView.setOnPreparedListener { mediaPlayer ->

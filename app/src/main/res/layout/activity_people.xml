@@ -1,0 +1,146 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+        <LinearLayout
+                android:id="@+id/ll_return_self"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="5dip"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:paddingTop="5dip">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="返回"
+                    android:visibility="visible"/>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/title_name_self"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="自诊"/>
+
+        <ImageView
+                android:id="@+id/iv_right_self"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip"
+                android:background="@mipmap/dl_second_icon_home_title"
+                android:visibility="gone"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+                android:id="@+id/rl_manbody_self"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="20dip">
+
+            <ImageView
+                    android:id="@+id/iv_manbody_front_self"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/dl_second_icon_man_front"/>
+
+            <ImageView
+                    android:id="@+id/iv_manbody_back_self"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/dl_second_icon_man_back"
+                    android:visibility="gone"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/rl_womanbody_self"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="20dip"
+                android:visibility="gone">
+
+            <ImageView
+                    android:id="@+id/iv_womanbody_front_self"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/dl_second_icon_woman_front"/>
+
+            <ImageView
+                    android:id="@+id/iv_womanbody_back_self"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/dl_second_icon_woman_back"
+                    android:visibility="gone"/>
+        </RelativeLayout>
+
+        <LinearLayout
+                android:id="@+id/ll_turn_self"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dip"
+                android:layout_marginLeft="20dip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    android:src="@mipmap/dl_second_icon_turn"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:text="转身"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/ll_gender_self"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="20dip"
+                android:layout_marginRight="20dip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    android:src="@mipmap/dl_second_icon_gender"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:text="转换性别"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
