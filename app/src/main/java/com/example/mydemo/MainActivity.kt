@@ -40,8 +40,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        var time = System.currentTimeMillis()
-//        Log.i("111","$time | ${(time/1000).toInt()}")
         val typeface = ResourcesCompat.getFont(this, R.font.xingshu)
         tv_progress.typeface = typeface
         tv_progress.text = "已抢了50%;"
@@ -83,6 +81,27 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
 
+        videoBackGround()
+
+        bannerHandler = BannerHandler(this)
+        rtvNum.addCharOrder(CharOrder.Number)
+        rtvNum.animationDuration = 500L
+        rtvNum.letterSpacingExtra = 15
+        rtvNum.showCharBg = true
+
+        initCommunity()
+
+        viewpager()
+    }
+
+
+
+    override fun onRestart() {
+        super.onRestart()
+    }
+
+    //视频背景
+    private fun videoBackGround(){
 
         videoView.setOnPreparedListener { mediaPlayer ->
             mediaPlayer.setOnVideoSizeChangedListener { mediaPlayer, _, _ ->
@@ -103,27 +122,11 @@ class MainActivity : BaseActivity() {
             }
         }
         startVideoBg()
-
-        bannerHandler = BannerHandler(this)
-        rtvNum.addCharOrder(CharOrder.Number)
-        rtvNum.animationDuration = 500L
-        rtvNum.letterSpacingExtra = 15
-        rtvNum.showCharBg = true
-
-        initCommunity()
-
-        viewpager()
-    }
-
-
-
-    override fun onRestart() {
-        super.onRestart()
     }
 
     private var currentPagerPosition = 0//100
     private var needAutoMove = false
-
+    // 无限循环
     private fun viewpager(){
         mViewpagerHandler = MyViewpagerHandler(this)
         val datas = arrayListOf("https://static.chuanghehui.com/othermaterial/app/club-images/%E4%BA%BA%E5%8A%9B3.png",
@@ -224,7 +227,7 @@ class MainActivity : BaseActivity() {
 //        Log.i("111", "startVideoBg  end")
     }
 
-    fun initCommunity() {
+    private fun initCommunity() {
         val cbb = ArrayList<CommunityBannerBean>()
         cbb.add(
             CommunityBannerBean(
