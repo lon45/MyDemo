@@ -10,7 +10,7 @@
     <permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
@@ -23,17 +23,26 @@
             android:name=".MyApp"
             android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
         <activity
-                android:name=".MainActivity">
+                android:name=".MainActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".countdown.CountDownTimerActivity"/>
-        <activity android:name=".downLoad.DownLoadActivity"/>
-        <activity android:name=".deviceInfo.DeviceActivity"/>
-        <activity android:name=".PeopleActivity"/>
+        <activity android:name=".countdown.CountDownTimerActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".downLoad.DownLoadActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".deviceInfo.DeviceActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".PeopleActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".coordinator_Layout.CoordinatorLayoutActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".coordinator_Layout.CoordinatorLayout2Activity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

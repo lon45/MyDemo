@@ -31,7 +31,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_indicator.view.*
 import java.lang.ref.WeakReference
 import androidx.core.content.res.ResourcesCompat
-
+import com.example.mydemo.coordinator_Layout.CoordinatorLayout2Activity
+import com.example.mydemo.coordinator_Layout.CoordinatorLayoutActivity
 
 
 class MainActivity : BaseActivity() {
@@ -61,6 +62,18 @@ class MainActivity : BaseActivity() {
             //下载
             var intent = Intent(this@MainActivity, DownLoadActivity::class.java)
             startActivity(intent)
+        }
+
+        tv_liandong.setOnClickListener {
+            if (!Utils.isFastDoubleClick()) {
+                return@setOnClickListener
+            }
+            //联动
+            var intent = Intent(this@MainActivity, CoordinatorLayoutActivity::class.java)
+            startActivity(intent)
+//            var intent = Intent(this@MainActivity, CoordinatorLayout2Activity::class.java)
+//            startActivity(intent)
+
         }
 
         tv_device.setOnClickListener {
@@ -95,13 +108,12 @@ class MainActivity : BaseActivity() {
     }
 
 
-
     override fun onRestart() {
         super.onRestart()
     }
 
     //视频背景
-    private fun videoBackGround(){
+    private fun videoBackGround() {
 
         videoView.setOnPreparedListener { mediaPlayer ->
             mediaPlayer.setOnVideoSizeChangedListener { mediaPlayer, _, _ ->
@@ -127,11 +139,13 @@ class MainActivity : BaseActivity() {
     private var currentPagerPosition = 0//100
     private var needAutoMove = false
     // 无限循环
-    private fun viewpager(){
+    private fun viewpager() {
         mViewpagerHandler = MyViewpagerHandler(this)
-        val datas = arrayListOf("https://static.chuanghehui.com/othermaterial/app/club-images/%E4%BA%BA%E5%8A%9B3.png",
+        val datas = arrayListOf(
+            "https://static.chuanghehui.com/othermaterial/app/club-images/%E4%BA%BA%E5%8A%9B3.png",
             "https://static.chuanghehui.com/othermaterial/app/club-images/%E4%BA%BA%E6%96%871.png",
-            "https://static.chuanghehui.com/othermaterial/app/club-images/%E5%88%9B%E6%8A%95.png")
+            "https://static.chuanghehui.com/othermaterial/app/club-images/%E5%88%9B%E6%8A%95.png"
+        )
         indicatorContainerLL.removeAllViews()
         mViewpagerHandler.removeCallbacksAndMessages(null)
 
@@ -215,7 +229,6 @@ class MainActivity : BaseActivity() {
     }
 
 
-
     //播放登录前的视频
     private fun startVideoBg() {
 //        Log.i("111", "startVideoBg")
@@ -289,7 +302,8 @@ class MainActivity : BaseActivity() {
 //        bannerHandler.sendEmptyMessageDelayed(0, 5000)
 //        bannerMove = true
     }
-    var anim:ValueAnimator? = null
+
+    var anim: ValueAnimator? = null
     override fun onResume() {
         super.onResume()
 
@@ -298,18 +312,19 @@ class MainActivity : BaseActivity() {
         }
 
 //        if (bannerMove) {
-            bannerHandler.sendEmptyMessageDelayed(0, 5000)
+        bannerHandler.sendEmptyMessageDelayed(0, 5000)
 //        }
 
-        if(anim == null){
-            anim = ValueAnimator.ofFloat(0f,1f)
+        if (anim == null) {
+            anim = ValueAnimator.ofFloat(0f, 1f)
 
             anim!!.addUpdateListener {
                 view_anim.visibility = View.VISIBLE
-                Log.i("anim","${it.animatedValue} | ${view_anim.width}")
+                Log.i("anim", "${it.animatedValue} | ${view_anim.width}")
                 it.animatedValue
                 //设置View的显示区域，坐标是自身
-                var tmp = Rect(0, 0, (it.animatedValue.toString().toFloat() * view_anim.width).toInt(), view_anim.height)
+                var tmp =
+                    Rect(0, 0, (it.animatedValue.toString().toFloat() * view_anim.width).toInt(), view_anim.height)
                 view_anim.clipBounds = tmp
 
             }
@@ -324,7 +339,7 @@ class MainActivity : BaseActivity() {
         bannerHandler.removeCallbacksAndMessages(null)
         mViewpagerHandler.removeCallbacksAndMessages(null)
 
-        if(anim!= null && anim!!.isRunning){
+        if (anim != null && anim!!.isRunning) {
             anim!!.cancel()
             anim = null
         }
@@ -346,8 +361,6 @@ class MainActivity : BaseActivity() {
     private lateinit var mViewpagerHandler: MyViewpagerHandler
 
 
-
-
     private lateinit var bannerHandler: BannerHandler
 //    private var bannerMove = false
 
@@ -366,11 +379,6 @@ class MainActivity : BaseActivity() {
     //            if (vbvCommunity != null) {
 //                vbvCommunity.performSwitch()
 //            }
-
-
-
-
-
 
 
     //webview 中 视频全屏
@@ -437,9 +445,6 @@ class MainActivity : BaseActivity() {
 //        mCustomViewCallback = null
 //
 //    }
-
-
-
 
 
 }
