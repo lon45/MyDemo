@@ -1,11 +1,8 @@
 package com.example.mydemo
 
-import android.animation.Animator
-import android.animation.TimeAnimator
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
@@ -15,9 +12,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import android.webkit.WebChromeClient
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.core.view.forEach
 import androidx.viewpager.widget.ViewPager
@@ -31,8 +25,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_indicator.view.*
 import java.lang.ref.WeakReference
 import androidx.core.content.res.ResourcesCompat
-import com.example.mydemo.coordinator_Layout.CoordinatorLayout2Activity
 import com.example.mydemo.coordinator_Layout.CoordinatorLayoutActivity
+import com.example.mydemo.views.MyCircleProgress
 
 
 class MainActivity : BaseActivity() {
@@ -44,6 +38,8 @@ class MainActivity : BaseActivity() {
         val typeface = ResourcesCompat.getFont(this, R.font.xingshu)
         tv_progress.typeface = typeface
         tv_progress.text = "已抢了50%;"
+
+        mycp.setValue(5)
 
         tv_countdown.setOnClickListener {
             if (!Utils.isFastDoubleClick()) {
@@ -69,10 +65,10 @@ class MainActivity : BaseActivity() {
                 return@setOnClickListener
             }
             //联动
-            var intent = Intent(this@MainActivity, CoordinatorLayoutActivity::class.java)
-            startActivity(intent)
-//            var intent = Intent(this@MainActivity, CoordinatorLayout2Activity::class.java)
+//            var intent = Intent(this@MainActivity, CoordinatorLayoutActivity::class.java)
 //            startActivity(intent)
+            var intent = Intent(this@MainActivity, TestActivity::class.java)
+            startActivity(intent)
 
         }
 
