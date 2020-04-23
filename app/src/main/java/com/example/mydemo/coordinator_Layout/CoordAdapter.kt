@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mydemo.R
-import kotlinx.android.synthetic.main.item_string.view.*
+import kotlinx.android.synthetic.main.item_coord.view.*
 
 /**
  *Date: 2020/4/8
  *author: hxc
  */
-class StringAdapter(val mContext: Context, val data: ArrayList<String>) :
-    RecyclerView.Adapter<StringAdapter.ViewHolder>() {
+class CoordAdapter(val mContext: Context, val data: ArrayList<CoordBean>) :
+    RecyclerView.Adapter<CoordAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val inflater = LayoutInflater.from(mContext)
-        val view = inflater.inflate(R.layout.item_string, null)
+        val view = inflater.inflate(R.layout.item_coord, null)
         return ViewHolder(view)
     }
 
@@ -29,8 +29,10 @@ class StringAdapter(val mContext: Context, val data: ArrayList<String>) :
 
         var item = data[position]
 
-        holder.itemView.tv_string.text = item
+        holder.itemView.tv_string.text = item.name
 
+        holder.itemView.recyclerView_info.adapter = StringAdapter(mContext, item.info)
+//        holder.itemView.recyclerView_info.visibility = View.GONE
     }
 
 

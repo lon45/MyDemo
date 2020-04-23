@@ -71,7 +71,7 @@ class MyViewpager(private val mContext: Context, private val datas:List<String>,
 
 //
 
-            view.setOnClickListener { onItemClick(datas[position]) }
+            view.setOnClickListener { onItemClick(datas[position % datas.size]) }
         }
         container.addView(view)
         return view

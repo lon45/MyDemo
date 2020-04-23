@@ -104,6 +104,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:descendantFocusability="beforeDescendants"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_string"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>

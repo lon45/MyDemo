@@ -65,10 +65,10 @@ class MainActivity : BaseActivity() {
                 return@setOnClickListener
             }
             //联动
-//            var intent = Intent(this@MainActivity, CoordinatorLayoutActivity::class.java)
-//            startActivity(intent)
-            var intent = Intent(this@MainActivity, TestActivity::class.java)
+            var intent = Intent(this@MainActivity, CoordinatorLayoutActivity::class.java)
             startActivity(intent)
+//            var intent = Intent(this@MainActivity, TestActivity::class.java)
+//            startActivity(intent)
 
         }
 
