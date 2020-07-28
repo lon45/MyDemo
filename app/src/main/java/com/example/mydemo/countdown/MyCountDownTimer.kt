@@ -1,5 +1,6 @@
 package com.example.mydemo.countdown
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.CountDownTimer
 import android.util.AttributeSet
@@ -82,16 +83,6 @@ class MyCountDownTimer : TextView {
             countDownTimer = null
         }
     }
-
-
-//    fun matchTime(timeStr: String): Boolean {
-//        val regex = "^([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])\$"
-//        val p = Pattern.compile(regex)
-//        p.matcher(timeStr)
-//        return p.matcher(timeStr).matches()
-//
-//    }
-
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()

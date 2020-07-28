@@ -34,7 +34,7 @@ class CountDownAdapter(val mContext: Context, val timeList: ArrayList<Int>) :
             var item = timeList[position]
 
             holder.itemView.myCountTimer.setTime(item)
-
+            holder.itemView.myCountTimer2.setTime(item)
 
         }
 
