@@ -1,14 +1,13 @@
-package com.nader.tysmart.ui.views
+package com.example.mydemo.views
 
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.math.sqrt
+import kotlin.math.*
 
 
 /**
@@ -241,12 +240,22 @@ class CircleProgress : View {
         startAnim(index)
     }
 
-    //更新温度
+    //更新温度 (点击加减)
     fun updateValue(value:Int){
-        this.currentValue = value
+        if(value in 10..30) {
+            this.currentValue = value
+            var index = lineCount.toFloat() * (value - minvalue) / (maxValue - minvalue)
+            startAnim(index)
+        }
+    }
+    //更新温度 (滑动)
+    private fun updateValue(value:Float){
+        if(value in 10f..30f) {
+            this.currentValue = value.roundToInt()
 //        currentIndex = lineCount.toFloat() *(currentValue - minvalue) / (maxValue - minvalue)
-        var index = lineCount.toFloat() *(currentValue - minvalue) / (maxValue - minvalue)
-        startAnim(index)
+            var index = lineCount.toFloat() * (value - minvalue) / (maxValue - minvalue)
+            startAnim(index)
+        }
     }
     //动画效果
     private fun startAnim(index:Float){
@@ -260,6 +269,8 @@ class CircleProgress : View {
         anim.start()
 
     }
+    //是否拖动
+    private var isDragging = false
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
 //        return super.onTouchEvent(event)
@@ -271,6 +282,11 @@ class CircleProgress : View {
 
         when(event.action){
             MotionEvent.ACTION_DOWN ->{
+                if (checkOnArc(currentX, currentY)) {
+                    var newProgress = calDegreeByPosition(currentX, currentY) / sweepAngle * (maxValue - minvalue) + minvalue
+                    updateValue(newProgress)
+                    isDragging = true
+                }
                 if(checkAdd(currentX,currentY)){
                     if(currentValue < maxValue){
                         updateValue(currentValue + 1)
@@ -283,9 +299,31 @@ class CircleProgress : View {
                 }
             }
             MotionEvent.ACTION_MOVE ->{
+                if(isDragging){
+                if (checkOnArc(currentX, currentY)) {
+                    var newProgress = calDegreeByPosition(
+                        currentX,
+                        currentY
+                    ) / sweepAngle * (maxValue - minvalue) + minvalue
+                    if (newProgress in 10f..30f) {
+                        this.currentValue = newProgress.roundToInt()
+                        currentIndex =
+                            lineCount.toFloat() * (newProgress - minvalue) / (maxValue - minvalue)
+                        invalidate()
+                    }
+                } else {
+                    isDragging = false
+                    // 回调，调用接口上传数据
+                }
+
+                }
 
             }
             MotionEvent.ACTION_UP ->{
+                if(isDragging){
+                    isDragging = false
+                    // 回调，调用接口上传数据
+                }
 
             }
 
@@ -293,17 +331,51 @@ class CircleProgress : View {
         return true
     }
 
-
+    /**
+     * 计算两点之间的距离
+     * */
     private fun calDistance(x1: Float,y1: Float,x2: Float,y2: Float): Float {
         return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2).toDouble()).toFloat()
     }
+    /**
+     * 检查是否点击减号
+     */
     private fun checkMinus(currentX: Float,currentY: Float): Boolean {
         val distance: Float = calDistance(currentX, currentY, mButtonMinusPoint.x, mButtonMinusPoint.y)
         return distance < 1.2 * buttonRadius
     }
-
+    /**
+     * 检查是否点击加号
+     */
     private fun checkAdd(currentX: Float,currentY: Float): Boolean {
         val distance: Float = calDistance(currentX, currentY, mButtonAddPoint.x, mButtonAddPoint.y)
         return distance < 1.2 * buttonRadius
     }
+
+
+    /**
+     * 判断该点是否在弧线上（附近）
+     */
+    private fun checkOnArc(currentX: Float, currentY: Float): Boolean {
+        val distance = calDistance(currentX, currentY, circlePoint.x, circlePoint.y)
+        val degree = calDegreeByPosition(currentX, currentY)
+        // 考虑到白色圆球半径为10 这里把距离加大
+        return distance > mRadius - 30 && distance < mRadius + 30 && degree >= -10 && degree <= sweepAngle + 10
+    }
+
+    /**
+     * 根据当前位置，计算出进度条已经转过的角度。
+     */
+    private fun calDegreeByPosition(currentX: Float,currentY: Float): Float {
+        var a1 = atan(1.0f * (circlePoint.x - currentX) / (currentY - circlePoint.y).toDouble()) * 180f / Math.PI
+        if (currentY < circlePoint.y) {
+            a1 += 180f
+        } else if (currentY > circlePoint.y && currentX > circlePoint.x) {
+            a1 += 360f
+        }
+        return a1.toFloat() - (360 - sweepAngle) / 2
+    }
+
+
+
 }
