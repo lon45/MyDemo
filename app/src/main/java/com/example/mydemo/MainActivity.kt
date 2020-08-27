@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.view_indicator.view.*
 import java.lang.ref.WeakReference
 import androidx.core.content.res.ResourcesCompat
 import com.example.mydemo.coordinator_Layout.CoordinatorLayoutActivity
+import com.example.mydemo.leftscroll.LeftScrollActivity
 import com.example.mydemo.views.MyCircleProgress
 
 
@@ -34,6 +35,20 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val wheelList = ArrayList<String>()
+        for(i in 0 until 10){
+            wheelList.add("第$i 条")
+        }
+
+        wheel.data = wheelList
+
+        tv_left_scroll.setOnClickListener {
+
+            //左滑删除
+            var intent = Intent(this@MainActivity, LeftScrollActivity::class.java)
+            startActivity(intent)
+        }
 
         val typeface = ResourcesCompat.getFont(this, R.font.xingshu)
         tv_progress.typeface = typeface

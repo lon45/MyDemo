@@ -21,9 +21,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:name=".MyApp"
-            android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="LockedOrientationActivity"
+            android:theme="@style/AppTheme">
+        <!--MainActivity-->
         <activity
-                android:name=".MainActivity"
+                android:name=".AirActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -45,6 +47,9 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".TestActivity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".leftscroll.LeftScrollActivity"
+                android:screenOrientation="portrait"/>
+<!--        <activity android:name=".AirActivity" />-->
     </application>
 
 </manifest>
