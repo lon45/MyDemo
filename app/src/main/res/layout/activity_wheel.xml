@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/white">
+
+    <com.itheima.wheelpicker.WheelPicker
+            android:id="@+id/wheel"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="#41444A"
+            app:wheel_atmospheric="true"
+            app:wheel_curved="true"
+            app:wheel_cyclic="true"
+            app:wheel_item_text_color="#FFFFFFFF"
+            app:wheel_selected_item_position="1"
+            app:wheel_selected_item_text_color="#FFFFFFFF"
+            app:wheel_visible_item_count="3" />
+</LinearLayout>

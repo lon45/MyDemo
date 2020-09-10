@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+    <fragment
+            android:id="@+id/fragment_viewanim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.example.mydemo.anim.ViewAnimFragment"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/view_anim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@color/colorAccent"
+                android:text="积分中心上线啦\n去做任务赚积分"
+                android:visibility="gone" />
+
+        <fragment
+                android:id="@+id/fragment_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.example.mydemo.anim.ViewpagerFragment"/>
+
+
+        <fragment
+                android:id="@+id/fragment_view1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.example.mydemo.anim.View1Fragment"/>
+
+    </LinearLayout>
+</RelativeLayout>
