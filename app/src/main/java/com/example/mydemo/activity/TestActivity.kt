@@ -1,10 +1,11 @@
-package com.example.mydemo
+package com.example.mydemo.activity
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
+import com.example.mydemo.R
+import com.example.mydemo.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_test.*
 
 /**

@@ -1,4 +1,4 @@
-package com.example.mydemo
+package com.example.mydemo.banner1
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,6 +9,7 @@ import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.example.mydemo.R
 import kotlinx.android.synthetic.main.item_home_banner.view.*
 
 /**

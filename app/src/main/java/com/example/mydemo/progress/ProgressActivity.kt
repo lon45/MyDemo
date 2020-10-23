@@ -2,7 +2,7 @@ package com.example.mydemo.progress
 
 import android.os.Bundle
 import androidx.core.content.res.ResourcesCompat
-import com.example.mydemo.BaseActivity
+import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.R
 import kotlinx.android.synthetic.main.activity_progress.*
 
@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_progress.*
  *author: hxc
  * 进度条类
  */
-class ProgressActivity :BaseActivity() {
+class ProgressActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

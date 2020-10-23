@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/gray">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -13,82 +13,58 @@
 
         <TextView
                 android:id="@+id/tv_wheel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="滚轮"
-                android:padding="10dp"
-                android:textColor="@color/white"/>
-        
+                style="@style/common_text_style"
+                android:text="滚轮" />
+
         <TextView
                 android:id="@+id/tv_left_scroll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="左滑删除"
-                android:padding="10dp"
-                android:textColor="@color/white"/>
+                style="@style/common_text_style"
+                android:text="左滑删除" />
 
         <TextView
                 android:id="@+id/tv_pan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="仪表盘"
-                android:padding="10dp"
-                android:textColor="@color/white"/>
+                style="@style/common_text_style"
+                android:text="仪表盘" />
+
         <TextView
                 android:id="@+id/tv_countdown"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="倒计时"
-                android:textColor="@color/white" />
+                style="@style/common_text_style"
+                android:text="倒计时" />
 
         <TextView
                 android:id="@+id/tv_download"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="下载"
-                android:textColor="@color/white" />
+                style="@style/common_text_style"
+                android:text="下载" />
 
         <TextView
                 android:id="@+id/tv_device"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="设备"
-                android:textColor="@color/white" />
+                style="@style/common_text_style"
+                android:text="设备" />
 
         <TextView
                 android:id="@+id/tv_liandong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="联动"
-                android:textColor="@color/white" />
+                style="@style/common_text_style"
+                android:text="联动" />
 
         <TextView
                 android:id="@+id/tv_people"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="根据色值判断点击事件"
-                android:textColor="@color/white" />
+                style="@style/common_text_style"
+                android:text="根据色值判断点击事件" />
 
         <TextView
                 android:id="@+id/tv_progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="进度条"
-                android:textColor="@color/white" />
+                style="@style/common_text_style"
+                android:text="进度条" />
 
         <TextView
                 android:id="@+id/tv_anim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="动画"
-                android:textColor="@color/white" />
+                style="@style/common_text_style"
+                android:text="动画" />
+
+        <TextView
+                android:id="@+id/tv_black_white"
+                style="@style/common_text_style"
+                android:text="黑白化"/>
 
 
     </LinearLayout>

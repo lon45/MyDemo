@@ -1,25 +1,13 @@
 package com.example.mydemo.anim
 
 import android.animation.ValueAnimator
-import android.app.Activity
 import android.graphics.Rect
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.widget.LinearLayout
-import androidx.core.view.forEach
-import androidx.viewpager.widget.ViewPager
-import com.example.mydemo.BaseActivity
-import com.example.mydemo.MyViewpager
+import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.R
-import com.example.mydemo.util.Utils
 import kotlinx.android.synthetic.main.activity_anim.*
-import kotlinx.android.synthetic.main.view_indicator.view.*
-import java.lang.ref.WeakReference
 
 /**
  *Date: 2020/9/10

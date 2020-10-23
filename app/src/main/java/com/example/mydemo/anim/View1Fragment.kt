@@ -1,32 +1,25 @@
 package com.example.mydemo.anim
 
 import android.app.Activity
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.core.view.forEach
-import androidx.viewpager.widget.ViewPager
 import com.example.mydemo.*
+import com.example.mydemo.banner1.CommunityBannerAdapter
+import com.example.mydemo.banner1.CommunityBannerBean
+import com.example.mydemo.base.BaseFragment
 import com.example.mydemo.interfaces.OnCallback
-import com.example.mydemo.util.Utils
 import com.example.mydemo.views.rollingtextview.CharOrder
 import kotlinx.android.synthetic.main.fragment_view1.*
-import kotlinx.android.synthetic.main.fragment_viewanim.*
-import kotlinx.android.synthetic.main.fragment_viewpager.*
-import kotlinx.android.synthetic.main.view_indicator.view.*
-import java.lang.ref.WeakReference
 
 /**
  *Date: 2020/9/10
  *author: hxc
  */
-class View1Fragment:BaseFragment() {
+class View1Fragment: BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_view1,container,false)
@@ -103,7 +96,11 @@ class View1Fragment:BaseFragment() {
         )
 
         if (vbvCommunity.adapter == null) {
-            vbvCommunity.adapter = CommunityBannerAdapter(activity!!, cbb)
+            vbvCommunity.adapter =
+                CommunityBannerAdapter(
+                    activity!!,
+                    cbb
+                )
         } else {
             vbvCommunity.adapter.setData(cbb)
         }

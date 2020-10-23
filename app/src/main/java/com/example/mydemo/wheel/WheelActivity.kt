@@ -1,7 +1,7 @@
 package com.example.mydemo.wheel
 
 import android.os.Bundle
-import com.example.mydemo.BaseActivity
+import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.R
 import kotlinx.android.synthetic.main.activity_wheel.*
 
@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_wheel.*
  *author: hxc
  * 滚轮
  */
-class WheelActivity :BaseActivity() {
+class WheelActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -11,13 +11,11 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
-import com.example.mydemo.BaseActivity
+import com.example.mydemo.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_device.*
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.example.mydemo.R
-import com.example.mydemo.util.Utils
-import okhttp3.*
 import java.io.IOException
 import java.net.Inet4Address
 import java.net.InetAddress

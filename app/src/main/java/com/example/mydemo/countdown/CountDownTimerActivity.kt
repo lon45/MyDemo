@@ -1,7 +1,7 @@
 package com.example.mydemo.countdown
 
 import android.os.Bundle
-import com.example.mydemo.BaseActivity
+import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.R
 import kotlinx.android.synthetic.main.activity_count_down_timer.*
 

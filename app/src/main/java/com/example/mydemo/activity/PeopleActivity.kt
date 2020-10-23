@@ -1,4 +1,4 @@
-package com.example.mydemo
+package com.example.mydemo.activity
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -11,6 +11,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mydemo.R
 import com.example.mydemo.util.Utils
 import com.example.mydemo.views.MyRotateAnimation
 import kotlinx.android.synthetic.main.activity_people.*
@@ -126,10 +127,18 @@ class PeopleActivity : AppCompatActivity(), View.OnClickListener, MyRotateAnimat
 
     private fun startGenderAnimator() {
 
-        animationLeftIn = AnimationUtils.loadAnimation(this, R.anim.push_left_in)
-        animationLeftOut = AnimationUtils.loadAnimation(this, R.anim.push_left_out)
-        animationRightIn = AnimationUtils.loadAnimation(this, R.anim.push_right_in)
-        animationRightOut = AnimationUtils.loadAnimation(this, R.anim.push_right_out)
+        animationLeftIn = AnimationUtils.loadAnimation(this,
+            R.anim.push_left_in
+        )
+        animationLeftOut = AnimationUtils.loadAnimation(this,
+            R.anim.push_left_out
+        )
+        animationRightIn = AnimationUtils.loadAnimation(this,
+            R.anim.push_right_in
+        )
+        animationRightOut = AnimationUtils.loadAnimation(this,
+            R.anim.push_right_out
+        )
         animationLeftIn!!.setAnimationListener(animListener)
         animationLeftOut!!.setAnimationListener(animListener)
         animationRightIn!!.setAnimationListener(animListener)
@@ -260,7 +269,9 @@ class PeopleActivity : AppCompatActivity(), View.OnClickListener, MyRotateAnimat
         if (firstInput) {
             firstInput = false
 
-            val bm = BitmapFactory.decodeResource(resources, R.mipmap.dl_second_icon_man_icon_man_front1)
+            val bm = BitmapFactory.decodeResource(resources,
+                R.mipmap.dl_second_icon_man_icon_man_front1
+            )
             val bmW = bm.width
             val bmH = bm.height
 

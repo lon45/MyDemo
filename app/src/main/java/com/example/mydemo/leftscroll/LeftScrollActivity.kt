@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mydemo.BaseActivity
+import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.R
 import com.yanzhenjie.recyclerview.*
 import kotlinx.android.synthetic.main.activity_left_scorll.*

@@ -4,17 +4,12 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
-import android.util.Log
 import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
-import com.example.mydemo.BaseActivity
+import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.R
 import com.example.mydemo.util.MeasureUtil
-import com.example.mydemo.util.Utils
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_coordinatorlayout.*
-import kotlinx.android.synthetic.main.item_coord.*
-import kotlinx.android.synthetic.main.item_coord.view.*
 import com.example.mydemo.views.TopLayoutManager
 
 

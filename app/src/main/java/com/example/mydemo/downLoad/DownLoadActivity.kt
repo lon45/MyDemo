@@ -6,8 +6,7 @@ import android.content.pm.PackageManager
 import android.os.*
 import android.text.format.Formatter
 import android.util.Log
-import android.widget.TextView
-import com.example.mydemo.BaseActivity
+import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.downLoad.bean.DownLoadInfo
 import com.example.mydemo.downLoad.pinterface.OnProgressListener
 import com.example.mydemo.R

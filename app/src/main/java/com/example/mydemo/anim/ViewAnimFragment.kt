@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.mydemo.BaseFragment
+import com.example.mydemo.base.BaseFragment
 import com.example.mydemo.R
 import kotlinx.android.synthetic.main.fragment_viewanim.*
 
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_viewanim.*
  *Date: 2020/9/10
  *author: hxc
  */
-class ViewAnimFragment:BaseFragment() {
+class ViewAnimFragment: BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_viewanim,container,false)

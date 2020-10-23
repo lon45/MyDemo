@@ -1,7 +1,6 @@
 package com.example.mydemo.anim
 
 import android.app.Activity
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -12,11 +11,10 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.forEach
 import androidx.viewpager.widget.ViewPager
-import com.example.mydemo.BaseFragment
-import com.example.mydemo.MyViewpager
+import com.example.mydemo.base.BaseFragment
+import com.example.mydemo.banner1.MyViewpager
 import com.example.mydemo.R
 import com.example.mydemo.util.Utils
-import kotlinx.android.synthetic.main.fragment_viewanim.*
 import kotlinx.android.synthetic.main.fragment_viewpager.*
 import kotlinx.android.synthetic.main.view_indicator.view.*
 import java.lang.ref.WeakReference
@@ -25,7 +23,7 @@ import java.lang.ref.WeakReference
  *Date: 2020/9/10
  *author: hxc
  */
-class ViewpagerFragment:BaseFragment() {
+class ViewpagerFragment: BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_viewpager,container,false)
@@ -135,9 +133,10 @@ class ViewpagerFragment:BaseFragment() {
 
         }
 
-        bannerVP.adapter = MyViewpager(activity!!, datas) {
+        bannerVP.adapter =
+            MyViewpager(activity!!, datas) {
 
-        }
+            }
         bannerVP.offscreenPageLimit = 3
         bannerVP.currentItem = datas.size * 100
 

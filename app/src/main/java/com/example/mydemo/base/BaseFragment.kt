@@ -1,4 +1,4 @@
-package com.example.mydemo
+package com.example.mydemo.base
 
 import androidx.fragment.app.Fragment
 

@@ -1,10 +1,11 @@
-package com.example.mydemo
+package com.example.mydemo.banner1
 
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.mydemo.R
 import com.example.mydemo.views.VerticalBannerView.BaseBannerAdapter
 import com.example.mydemo.views.VerticalBannerView.VerticalBannerView
 import kotlinx.android.synthetic.main.fragment_community_banner_item.view.*

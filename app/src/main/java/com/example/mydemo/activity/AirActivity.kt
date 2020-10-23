@@ -1,6 +1,8 @@
-package com.example.mydemo
+package com.example.mydemo.activity
 
 import android.os.Bundle
+import com.example.mydemo.R
+import com.example.mydemo.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_air.*
 
 /**

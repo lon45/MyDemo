@@ -25,7 +25,7 @@
             android:theme="@style/AppTheme">
         <!--MainActivity-->
         <activity
-                android:name=".MainActivity"
+                android:name=".activity.MainActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -39,23 +39,25 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".deviceInfo.DeviceActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".PeopleActivity"
+        <activity android:name=".activity.PeopleActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".coordinator_Layout.CoordinatorLayoutActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".coordinator_Layout.CoordinatorLayout2Activity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".TestActivity"
+        <activity android:name=".activity.TestActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".leftscroll.LeftScrollActivity"
                 android:screenOrientation="portrait"/>
-        <activity android:name=".AirActivity"
+        <activity android:name=".activity.AirActivity"
                 android:screenOrientation="portrait" />
         <activity android:name=".progress.ProgressActivity"
                 android:screenOrientation="portrait" />
         <activity android:name=".wheel.WheelActivity"
                 android:screenOrientation="portrait" />
         <activity android:name=".anim.AnimActivity"
+                android:screenOrientation="portrait" />
+        <activity android:name=".activity.BlackWhiteActivity"
                 android:screenOrientation="portrait" />
     </application>
 
