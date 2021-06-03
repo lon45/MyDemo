@@ -7,7 +7,7 @@
                 android:name=".TestActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:label="@string/title_activity_test"
-                android:theme="@style/FullscreenTheme"></activity>
+                android:theme="@style/FullscreenTheme" />
     </application>
 
 </manifest>

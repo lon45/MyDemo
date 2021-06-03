@@ -1,4 +1,4 @@
-package com.nader.collectmiclib
+package com.nader.collectmiclib.bean
 
 /**
  *Date: 2021/5/13

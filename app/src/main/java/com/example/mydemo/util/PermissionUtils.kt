@@ -133,4 +133,21 @@ object PermissionUtils {
     }
 
 
+    fun requestRecordAudio(activity: Activity): Boolean {
+        if (afterM()) {
+            val hasPermission = activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO)
+            if (hasPermission != PackageManager.PERMISSION_GRANTED) {
+                activity.requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO,Manifest.permission.MODIFY_AUDIO_SETTINGS), 86)
+                return false
+            }
+
+//            val hasPermission1 = activity.checkSelfPermission(Manifest.permission.MODIFY_AUDIO_SETTINGS)
+//            if (hasPermission1 != PackageManager.PERMISSION_GRANTED) {
+//                activity.requestPermissions(arrayOf(Manifest.permission.MODIFY_AUDIO_SETTINGS), 86)
+//                return false
+//            }
+        }
+        return true
+    }
+
 }

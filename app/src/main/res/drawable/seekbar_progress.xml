@@ -2,20 +2,29 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape>
-            <solid android:color="#6e6e6e" />
+<!--            <solid android:color="#6e6e6e" />-->
+            <gradient android:angle="0"
+                android:startColor="@color/black"
+                android:endColor="@color/white"/>
         </shape>
     </item>
     <item android:id="@android:id/secondaryProgress">
         <clip>
             <shape>
-                <solid android:color="@android:color/white" />
+<!--                <solid android:color="@android:color/white" />-->
+                <gradient android:angle="0"
+                        android:startColor="@color/black"
+                        android:endColor="@color/white"/>
             </shape>
         </clip>
     </item>
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <solid android:color="@android:color/white" />
+<!--                <solid android:color="@android:color/white" />-->
+                <gradient android:angle="0"
+                        android:startColor="@color/black"
+                        android:endColor="@color/white"/>
             </shape>
         </clip>
     </item>

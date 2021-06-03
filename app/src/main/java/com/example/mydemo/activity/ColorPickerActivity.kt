@@ -1,50 +1,75 @@
 package com.example.mydemo.activity
 
-import android.content.Intent
-import android.net.Uri
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.SeekBar
 import com.example.mydemo.R
-import com.example.mydemo.adapter.DragSortAdapter
 import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.util.Utils
-import com.example.mydemo.views.MyCodeView
-import com.yanzhenjie.recyclerview.touch.OnItemMoveListener
-import kotlinx.android.synthetic.main.activity_code.*
-import kotlinx.android.synthetic.main.activity_drag_sort.*
-import java.util.*
+import com.example.mydemo.views.ColorPickerView
+import com.example.mydemo.views.MyColorPickerView
+import kotlinx.android.synthetic.main.activity_color_picker.*
+
+
 
 
 /**
  *Date: 2020/12/4
  *author: hxc
- * 验证码demo
+ * 颜色选择demo
  */
-class CodeActivity :BaseActivity() {
+class ColorPickerActivity :BaseActivity() {
 
+
+    private var mHsv:FloatArray? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_code)
+        setContentView(R.layout.activity_color_picker)
 
-        mCodeView.showSoft()
-        mCodeView.setOnInputListener(object : MyCodeView.OnInputListener{
-            override fun onFinish(code: String) {
-                Log.e("setOnInputListener","$code")
+        seekbar_1.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+            change()
             }
 
-            override fun onCurrent(position:Int) {
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
 
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
+        mv.setColor(Color.parseColor("#FFF0F5"))
+        mv.setOnColorChangedListener(object : MyColorPickerView.OnColorChangedListener{
+            override fun onColorChange(hsv: FloatArray) {
+                mHsv = hsv
+                change()
             }
 
         })
 
+
+    }
+
+    fun change(){
+        if(mHsv == null){
+            return
+        }
+//        Log.i("progress","${seekbar_1.progress * 255 / 100}")
+//        view_color.setBackgroundColor(Color.HSVToColor(seekbar_1.progress * 255 / 100,mHsv))
+//        tv_color.text = "${Utils.colorIntToRGB(Color.HSVToColor(seekbar_1.progress * 255 / 100,mHsv))}"
+        /**改变 hsv中的V**/
+        var progress = seekbar_1.progress.toFloat() * 3 / 10 + 70
+        mHsv!![2] = progress / 100
+        view_color.setBackgroundColor(Color.HSVToColor(mHsv))
+        tv_color.text = "${Utils.colorIntToRGB(Color.HSVToColor(mHsv))}"
     }
 
     override fun onResume() {
         super.onResume()
-//        mCodeView.showSoft()
+//        mv.setColor(Color.parseColor("#ff0000"))
+        mv.setColor(Color.parseColor("#FFF0F5"))
     }
 
 }

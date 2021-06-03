@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray">
+        android:background="@color/gray"
+        android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -15,6 +21,21 @@
                 android:id="@+id/tv_wheel"
                 style="@style/common_text_style"
                 android:text="滚轮" />
+
+        <TextView
+                android:id="@+id/tv_drag_sort_scroll"
+                style="@style/common_text_style"
+                android:text="拖拽排序"/>
+
+        <TextView
+                android:id="@+id/tv_code"
+                style="@style/common_text_style"
+                android:text="验证码" />
+
+        <TextView
+                android:id="@+id/tv_color"
+                style="@style/common_text_style"
+                android:text="颜色选择" />
 
         <TextView
                 android:id="@+id/tv_left_scroll"
@@ -66,6 +87,11 @@
                 style="@style/common_text_style"
                 android:text="黑白化"/>
 
+        <TextView
+                android:id="@+id/tv_audio"
+                style="@style/common_text_style"
+                android:text="录音"/>
 
     </LinearLayout>
-</RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

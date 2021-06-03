@@ -1,3 +1,4 @@
 include ':app', ':mylib'
 include ':mylib'
 include ':mylib2'
+include ':collectmiclib'

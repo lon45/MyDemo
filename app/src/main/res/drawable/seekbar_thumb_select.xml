@@ -2,30 +2,30 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true">
         <shape android:shape="oval">
-            <solid android:color="@color/color_bcbcbc"/>
-            <size android:width="@dimen/layout_30dp"
-                android:height="@dimen/layout_30dp"/>
+            <solid android:color="@color/colorAccent"/>
+            <size android:width="@dimen/_30dp"
+                android:height="@dimen/_30dp"/>
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="oval">
-            <solid android:color="@color/color_bcbcbc"/>
-            <size android:width="@dimen/layout_30dp"
-                android:height="@dimen/layout_30dp"/>
+            <solid android:color="@color/colorAccent"/>
+            <size android:width="@dimen/_30dp"
+                android:height="@dimen/_30dp"/>
         </shape>
     </item>
     <item android:state_focused="true">
         <shape android:shape="oval">
-            <solid android:color="@color/color_bcbcbc"/>
-            <size android:width="@dimen/layout_30dp"
-                android:height="@dimen/layout_30dp"/>
+            <solid android:color="@color/colorAccent"/>
+            <size android:width="@dimen/_30dp"
+                android:height="@dimen/_30dp"/>
         </shape>
     </item>
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/color_white"/>
-            <size android:width="@dimen/layout_30dp"
-                android:height="@dimen/layout_30dp"/>
+            <solid android:color="@color/colorAccent"/>
+            <size android:width="@dimen/_30dp"
+                android:height="@dimen/_30dp"/>
         </shape>
     </item>
 </selector>

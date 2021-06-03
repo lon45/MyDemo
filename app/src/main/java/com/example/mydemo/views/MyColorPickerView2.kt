@@ -15,11 +15,13 @@ import kotlin.math.*
  *Date: 2021/1/13
  *author: hxc
  */
-class MyColorPickerView : View {
+class MyColorPickerView2 : View {
 
     private var mContext: Context? = null
     /** 绘制hsv的画笔**/
     private var mPaint = Paint()
+    /** Bitmap**/
+    private var mBitmap : Bitmap? = null
     /** 圆心**/
     var mCenterPoint = PointF(0F, 0F)
     /** 半径**/
@@ -37,17 +39,11 @@ class MyColorPickerView : View {
     /** 当前颜色值 **/
     var currentColor = 0
 
-    /** 颜色分区 **/
-    val colorCount = 6
-    /** 颜色角度 **/
-    val colorAngleStep = 360 / colorCount
-    /** 每个分区颜色  **/
-    val colors = IntArray(colorCount + 1)
-    /** hsv **/
-    val hsv = floatArrayOf(0f, 1f, 1f)
-
     /** 是否从外面传入颜色 **/
     private var isSetColor = false
+
+    private var w = 0
+    private var h = 0
 
 
     constructor(context: Context) : this(context, null) {
@@ -68,14 +64,6 @@ class MyColorPickerView : View {
     private fun init() {
         mPaint.isAntiAlias = true
 
-        //计算每一个分区颜色
-        for (i in colors.indices) {
-            hsv[0] = (360 - i * colorAngleStep % 360).toFloat()
-//            Log.i("colorAngleStep","${(360 - i * colorAngleStep % 360).toFloat()}")
-            colors[i] = Color.HSVToColor(hsv)
-        }
-        colors[colorCount] = colors[0]
-
         mPopPaint.isAntiAlias = true
         mPopPaint.style = Paint.Style.FILL
         mPopPaint.color = Color.parseColor("#E8E8E8")
@@ -84,6 +72,33 @@ class MyColorPickerView : View {
         mPopBorderPaint.style = Paint.Style.STROKE
         mPopBorderPaint.color = Color.parseColor("#88D3D3D3")
         mPopBorderPaint.strokeWidth = 2f
+    }
+
+    /**
+     * 绘制取色盘，可根据UI需求，使用资源图片代替
+     * @return
+     */
+    private fun createColorWheelBitmap(): Bitmap {
+        val bitmap: Bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        val radialGradient = RadialGradient(
+            mCenterPoint.x, mCenterPoint.y,
+            mRadius,
+            intArrayOf(
+                Color.parseColor("#FFF9E2AE"),
+                Color.parseColor("#FFFFFDFF"),
+                Color.parseColor("#FFDDF4FC")
+            ),
+            floatArrayOf(
+                0f,
+                0.7f,
+                1f
+            ),
+            Shader.TileMode.CLAMP
+        )
+        mPaint.shader = radialGradient
+        val canvas = Canvas(bitmap)
+        canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, mRadius, mPaint)
+        return bitmap
     }
 
     @SuppressLint("DrawAllocation")
@@ -96,28 +111,15 @@ class MyColorPickerView : View {
     }
     /**绘制hsv背景**/
     private fun drawBg(canvas: Canvas) {
-        val sweepGradient = SweepGradient(mCenterPoint.x, mCenterPoint.y, colors, null)
-        val radialGradient = RadialGradient(
-            mCenterPoint.x, mCenterPoint.y,
-            mRadius,
-            intArrayOf(
-                Color.parseColor("#FFFFFFFF"),
-                Color.parseColor("#CCFFFFFF"),
-                Color.parseColor("#00FFFFFF")
-            ),
-            null,
-            Shader.TileMode.CLAMP
-        )
-        val composeShader =
-            ComposeShader(sweepGradient, radialGradient, PorterDuff.Mode.SRC_OVER)
+//        mBitmap = createColorWheelBitmap()
+        // 画背景图片
+        canvas.drawBitmap(mBitmap, 0.toFloat(), 0.toFloat(), mPaint)
 
-        mPaint.shader = composeShader
-
-        canvas.drawCircle(mCenterPoint.x, mCenterPoint.y, mRadius, mPaint)
     }
     /**绘制气泡**/
     private fun drawPop(canvas: Canvas) {
         /**改变气泡颜色**/
+        Log.i("getIndex","drawPop $currentColor")
         mPopPaint.color = currentColor
 
         if (isSetColor) {
@@ -177,7 +179,9 @@ class MyColorPickerView : View {
 
         //将颜色传出去
         if(onColorChangedListener != null){
-            onColorChangedListener!!.onColorChange(pointToHsv(mCenterPoint.x,mCenterPoint.y,mPopPoint.x,mPopPoint.y))
+            var hsv = floatArrayOf(0f,1f,1f)
+            Color.colorToHSV(currentColor,hsv)
+            onColorChangedListener!!.onColorChange(hsv)
         }
 
 //        canvas.drawCircle(mPopPoint.x,mPopPoint.y,5f,mPopPaint)
@@ -194,7 +198,11 @@ class MyColorPickerView : View {
         mPopPoint.x = w.toFloat() / 2
         mPopPoint.y = h.toFloat() / 2
 
+        this.w = w
+        this.h = h
+
         mRadius = if (w > h) h.toFloat() / 2 else w.toFloat() / 2 - mPopRadius*2
+        mBitmap = createColorWheelBitmap()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -211,7 +219,9 @@ class MyColorPickerView : View {
                 if(sqrt(((event.y - mCenterPoint.y).pow(2.0f)+ (event.x - mCenterPoint.x).pow(2.0f)).toDouble()).toFloat() <= mRadius ){
                     mPopPoint.y = event.y
                     mPopPoint.x = event.x
-                    currentColor = Color.HSVToColor(pointToHsv(mCenterPoint.x,mCenterPoint.y,mPopPoint.x,mPopPoint.y))
+                    currentColor = getIndex(event)
+                    Log.i("getIndex","onTouchEvent $currentColor")
+//                    currentColor = Color.HSVToColor(pointToHsv(mCenterPoint.x,mCenterPoint.y,mPopPoint.x,mPopPoint.y))
                     invalidate()
                 }
             }
@@ -220,17 +230,6 @@ class MyColorPickerView : View {
         }
 
         return true
-    }
-    /**将点击的位置转为 hsv**/
-    private fun pointToHsv(centerX: Float, centerY: Float, popX: Float, popY: Float) :FloatArray{
-        val hsv = floatArrayOf(0f, 1f, 1f)
-
-        hsv[0] = getHue(centerX, centerY, popX, popY).toFloat()
-        hsv[1] = getSat(centerX, centerY, popX, popY)
-
-//        Log.i("colorAngleStep", "hsvhsv ${hsv[0]}|${hsv[1]}|${hsv[2]}")
-//        Log.i("pointToHsv", "${Utils.colorIntToRGB(Color.HSVToColor(hsv))}")
-        return hsv
     }
 
     /**从外部设置颜色**/
@@ -251,51 +250,6 @@ class MyColorPickerView : View {
     }
 
     /**
-     * 计算角度，即HSB中的H
-     *
-     * @param popX   pop 小圆point
-     * @param centerX center圆心point
-     * @return
-     */
-    private fun getHue(centerX: Float, centerY: Float, popX: Float, popY: Float): Double {
-        var hue = 0.0
-        val deltaA = abs(popX - centerX).toDouble()
-        val deltaB = abs(popY - centerY).toDouble()
-        val deltaC = sqrt(
-            deltaB.pow(2.0) + deltaA.pow(2.0)
-        )
-        if (centerX == popX && centerY == popY) {
-            return 0.0
-        }
-        if (centerX == popX) { //在Y轴上
-            hue = if (centerY > popY) {
-                90.0
-            } else {
-                270.0
-            }
-            return hue
-        }
-        if (centerY == popY) { //在X轴上
-            hue = if (centerX > popX) {
-                180.0
-            } else {
-                0.0
-            }
-            return hue
-        }
-        if (popX > centerX && centerY > popY) { //第一象限
-            hue = asin(deltaB / deltaC) * 180 / Math.PI
-        } else if (popX < centerX && popY < centerY) { //第二象限
-            hue = asin(deltaA / deltaC) * 180 / Math.PI + 90
-        } else if (popX < centerX && popY > centerY) { //第三象限
-            hue = asin(deltaB / deltaC) * 180 / Math.PI + 180
-        } else if (popX > centerX && popY > centerY) { //第四象限
-            hue = asin(deltaA / deltaC) * 180 / Math.PI + 270
-        }
-        return hue
-    }
-
-    /**
      * 计算角度，即HSB中的S
      *
      * @param popX   pop 小圆point
@@ -304,5 +258,18 @@ class MyColorPickerView : View {
      */
     private fun getSat(centerX: Float, centerY: Float, popX: Float, popY: Float): Float {
         return sqrt((popX - centerX).pow(2.0f) + ((popY - centerY).pow(2.0f)).toDouble()).toFloat() / mRadius
+    }
+
+    private fun getIndex(event: MotionEvent): Int {
+        var color = -1
+        val x = event.x.toInt()
+        val y = event.y.toInt()
+        if(mBitmap != null) {
+            if (mBitmap!!.width > x && mBitmap!!.height > y) {
+                color = mBitmap!!.getPixel(x, y)
+
+            }
+        }
+        return color
     }
 }

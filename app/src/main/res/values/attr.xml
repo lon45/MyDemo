@@ -23,4 +23,14 @@
         <attr name="gap" format="integer" />
         <attr name="animDuration" format="integer"/>
     </declare-styleable>
+    <!--取色器 start-->
+    <declare-styleable name="color_picker">
+        <!-- 背景圆的半径 -->
+        <attr name="circle_radius" format="dimension" />
+        <!-- 可滑动小球的半径 -->
+        <attr name="center_radius" format="dimension" />
+        <!-- 可滑动小球的颜色 -->
+        <attr name="center_color" format="color" />
+    </declare-styleable>
+    <!--取色器 end-->
 </resources>

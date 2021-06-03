@@ -7,12 +7,42 @@
               android:gravity="center_horizontal"
               android:orientation="vertical">
 
-    <com.example.mydemo.views.MyCodeView
-            android:id="@+id/mCodeView"
+
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="颜色选择器"/>
+
+    <SeekBar
+            android:id="@+id/seekbar_1"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:maxHeight="5dp"
+            android:minHeight="5dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/seekbar_progress"
+            android:thumb="@drawable/seekbar_thumb_select"/>
+
+    <View
+            android:id="@+id/view_color"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"/>
+
+    <TextView
+            android:id="@+id/tv_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
-
-
+            android:layout_marginTop="10dp"
+            android:text="颜色选择器"/>
+    
+    <com.example.mydemo.views.MyColorPickerView
+            android:id="@+id/mv"
+            android:layout_width="300dp"
+            android:layout_height="300dp"/>
+    <com.example.mydemo.views.MyColorPickerView2
+            android:id="@+id/mv2"
+            android:layout_width="300dp"
+            android:layout_height="300dp"/>
 </LinearLayout>

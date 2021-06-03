@@ -33,4 +33,9 @@
         <item name="android:textSize">22dp</item>
         <item name="android:padding">10dp</item>
     </style>
+
+    <declare-styleable name="PileLayout">
+        <attr name="PileLayout_vertivalSpace" format="dimension"/>
+        <attr name="PileLayout_pileWidth" format="dimension"/>
+    </declare-styleable>
 </resources>

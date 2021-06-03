@@ -7,10 +7,12 @@
               android:gravity="center_horizontal"
               android:orientation="vertical">
 
-<com.yanzhenjie.recyclerview.SwipeRecyclerView
-        android:id="@+id/srv_drag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    <com.example.mydemo.views.MyCodeView
+            android:id="@+id/mCodeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
 
 </LinearLayout>

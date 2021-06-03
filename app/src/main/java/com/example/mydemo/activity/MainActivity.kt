@@ -29,6 +29,13 @@ class MainActivity : BaseActivity() {
 
         }
 
+        tv_drag_sort_scroll.setOnClickListener {
+
+            //拖拽排序
+            var intent = Intent(this@MainActivity, DragSortActivity::class.java)
+            startActivity(intent)
+        }
+
         tv_left_scroll.setOnClickListener {
 
             //左滑删除
@@ -112,6 +119,22 @@ class MainActivity : BaseActivity() {
             var intent = Intent(this@MainActivity, PeopleActivity::class.java)
             startActivity(intent)
         }
+        //验证码控件
+        tv_code.setOnClickListener {
+            if (!Utils.isFastDoubleClick()) {
+                return@setOnClickListener
+            }
+            var intent = Intent(this@MainActivity, CodeActivity::class.java)
+            startActivity(intent)
+        }
+
+        tv_color.setOnClickListener {
+            if (!Utils.isFastDoubleClick()) {
+                return@setOnClickListener
+            }
+            var intent = Intent(this@MainActivity, ColorPickerActivity::class.java)
+            startActivity(intent)
+        }
 
         tv_black_white.setOnClickListener {
             if (!Utils.isFastDoubleClick()) {
@@ -121,7 +144,13 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
 
-
+        tv_audio.setOnClickListener {
+            if (!Utils.isFastDoubleClick()) {
+                return@setOnClickListener
+            }
+            var intent = Intent(this@MainActivity, MicActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
