@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+
+    <TextView
+            android:id="@+id/tv_play"
+            android:textColor="@color/colorPrimary"
+            style="@style/common_text_style"
+            android:text="黑白化"/>
+
+    <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+            style="@style/common_text_style"
+            android:textColor="@color/colorPrimary"
+            android:text="黑白化黑白化黑白化黑白化黑白化黑白化黑白化黑白化黑白化黑白化黑白化黑白化黑白化黑白化黑白化黑白化"/>
+
+</LinearLayout>
