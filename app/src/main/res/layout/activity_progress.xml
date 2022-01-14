@@ -35,4 +35,10 @@
                 android:text="已抢了50%;" />
     </RelativeLayout>
 
+    
+    <SeekBar
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:rotation="-90"
+            android:progress="100"/>
 </LinearLayout>

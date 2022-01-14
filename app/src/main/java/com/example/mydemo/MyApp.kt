@@ -16,7 +16,7 @@ class MyApp : MultiDexApplication() {
     }
 
 
-    fun initPath() {
+    private fun initPath() {
 
         //初始化 缓存地址
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {

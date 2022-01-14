@@ -1,8 +1,9 @@
-package com.example.mydemo.activity
+package com.example.mydemo.main
 
 import android.content.Intent
 import android.os.Bundle
 import com.example.mydemo.R
+import com.example.mydemo.activity.*
 import com.example.mydemo.downLoad.DownLoadActivity
 import com.example.mydemo.util.Utils
 import com.example.mydemo.countdown.CountDownTimerActivity
