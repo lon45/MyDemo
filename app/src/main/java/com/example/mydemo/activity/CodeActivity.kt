@@ -23,10 +23,11 @@ import java.util.*
  */
 class CodeActivity :BaseActivity() {
 
+    override fun getLayoutId(): Int {
+        return R.layout.activity_code
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_code)
+    override fun initView() {
 
         mCodeView.showSoft()
         mCodeView.setOnInputListener(object : MyCodeView.OnInputListener{
@@ -39,6 +40,10 @@ class CodeActivity :BaseActivity() {
             }
 
         })
+
+    }
+
+    override fun addListener() {
 
     }
 

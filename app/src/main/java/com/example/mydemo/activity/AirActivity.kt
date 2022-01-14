@@ -10,11 +10,17 @@ import kotlinx.android.synthetic.main.activity_air.*
  * */
 class AirActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_air)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_air
+    }
+
+    override fun initView() {
 
         cp.setValue(25,30)
+    }
+
+    override fun addListener() {
+
     }
 
     override fun onResume() {

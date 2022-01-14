@@ -25,14 +25,16 @@ import java.lang.ref.WeakReference
  */
 class ViewpagerFragment: BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_viewpager,container,false)
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_viewpager
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun initView() {
         viewpager()
+    }
+
+    override fun addListener() {
+
     }
 
     override fun onResume() {

@@ -12,9 +12,11 @@ import kotlinx.android.synthetic.main.activity_wheel.*
  */
 class WheelActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_wheel)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_wheel
+    }
+
+    override fun initView() {
 
         val wheelList = ArrayList<String>()
         for(i in 0 until 10){
@@ -22,6 +24,10 @@ class WheelActivity : BaseActivity() {
         }
 
         wheel.data = wheelList
+    }
+
+    override fun addListener() {
+
     }
 
 }

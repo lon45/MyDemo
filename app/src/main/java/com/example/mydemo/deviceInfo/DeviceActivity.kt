@@ -30,15 +30,22 @@ import java.util.*
  */
 class DeviceActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_device)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_device
+    }
+
+    override fun initView() {
+
         tv_info.text = getInfo()
 
         getLocation()
 
         Toast.makeText(this,getIPAddress(),Toast.LENGTH_SHORT).show()
 
+    }
+
+    override fun addListener() {
+        
     }
 
     // 设备信息

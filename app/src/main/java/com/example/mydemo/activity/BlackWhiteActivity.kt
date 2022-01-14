@@ -15,9 +15,15 @@ class BlackWhiteActivity : BaseActivity() {
 
     private var isBW = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_black_white)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_black_white
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun addListener() {
 
         tv_play.setOnClickListener {
             if (!Utils.isFastDoubleClick()) {

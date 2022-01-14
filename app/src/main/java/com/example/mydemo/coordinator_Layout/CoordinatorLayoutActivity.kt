@@ -24,9 +24,15 @@ class CoordinatorLayoutActivity : BaseActivity() {
     //展开状态
     private var expanded_state = true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coordinatorlayout)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_coordinatorlayout
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun addListener() {
 
         toolbar.setNavigationOnClickListener {
 

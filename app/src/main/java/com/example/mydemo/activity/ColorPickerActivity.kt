@@ -24,9 +24,11 @@ class ColorPickerActivity :BaseActivity() {
 
     private var mHsv:FloatArray? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_color_picker)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_color_picker
+    }
+
+    override fun initView() {
 
         seekbar_1.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -51,6 +53,11 @@ class ColorPickerActivity :BaseActivity() {
 
 
     }
+
+    override fun addListener() {
+
+    }
+
 
     fun change(){
         if(mHsv == null){

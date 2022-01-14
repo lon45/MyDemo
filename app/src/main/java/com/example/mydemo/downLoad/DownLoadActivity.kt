@@ -26,9 +26,11 @@ class DownLoadActivity : BaseActivity(), OnProgressListener {
 
     private val datas = ArrayList<DownLoadInfo>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_down_load)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_down_load
+    }
+
+    override fun initView() {
 
         val helper = DownLoadDbHelper(this)
         downLoader = DownLoaderManger.getInstance(helper)
@@ -149,6 +151,10 @@ class DownLoadActivity : BaseActivity(), OnProgressListener {
 
     }
 
+
+    override fun addListener() {
+
+    }
 
     override fun onResume() {
         super.onResume()

@@ -18,9 +18,15 @@ class AnimActivity : BaseActivity() {
 
     var anim: ValueAnimator? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_anim)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_anim
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun addListener() {
 
     }
 

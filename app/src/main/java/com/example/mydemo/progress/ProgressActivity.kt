@@ -13,15 +13,21 @@ import kotlinx.android.synthetic.main.activity_progress.*
  */
 class ProgressActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_progress)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_progress
+    }
+
+    override fun initView() {
 
         mycp.setValue(5)
 
         val typeface = ResourcesCompat.getFont(this, R.font.xingshu)
         tv_progress.typeface = typeface
         tv_progress.text = "已抢了50%;"
+    }
+
+    override fun addListener() {
+
     }
 
 }

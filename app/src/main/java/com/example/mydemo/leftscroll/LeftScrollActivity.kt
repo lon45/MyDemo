@@ -19,9 +19,11 @@ class LeftScrollActivity : BaseActivity() {
 
     private val datas = arrayListOf("111111111","222222","33333333","4444444444","555555555555","666666666")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_left_scorll)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_left_scorll
+    }
+
+    override fun initView() {
 
 //        rv_time.isItemViewSwipeEnabled = true// 开启滑动删除。默认关闭。
         rv_time.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -51,6 +53,10 @@ class LeftScrollActivity : BaseActivity() {
 
             Toast.makeText(this@LeftScrollActivity,"点击事件",Toast.LENGTH_LONG).show()
         }
+
+    }
+
+    override fun addListener() {
 
     }
 

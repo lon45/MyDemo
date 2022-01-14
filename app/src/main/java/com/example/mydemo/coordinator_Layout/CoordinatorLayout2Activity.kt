@@ -17,9 +17,11 @@ class CoordinatorLayout2Activity : BaseActivity() {
 
     private val data:ArrayList<String> = ArrayList()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coordinatorlayout2)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_coordinatorlayout2
+    }
+
+    override fun initView() {
 
         appbar.addOnOffsetChangedListener(object: AppBarStateChangeListener() {
             override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
@@ -44,6 +46,10 @@ class CoordinatorLayout2Activity : BaseActivity() {
         }
 
         recyclerView.adapter = StringAdapter(this,data)
+
+    }
+
+    override fun addListener() {
 
     }
 

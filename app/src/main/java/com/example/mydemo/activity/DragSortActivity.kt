@@ -20,10 +20,11 @@ class DragSortActivity :BaseActivity() {
 
     private val datas = arrayListOf("111111111","222222","33333333","4444444444","555555555555","666666666")
 
+    override fun getLayoutId(): Int {
+        return R.layout.activity_drag_sort
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_drag_sort)
+    override fun initView() {
 
         val mItemMoveListener: OnItemMoveListener = object : OnItemMoveListener {
             override fun onItemMove(srcHolder: RecyclerView.ViewHolder, targetHolder: RecyclerView.ViewHolder): Boolean {
@@ -86,4 +87,8 @@ class DragSortActivity :BaseActivity() {
 //        mMenuAdapter.notifyItemMoved(fromPosition, toPosition)
 //        return true
 //    }
+
+    override fun addListener() {
+
+    }
 }

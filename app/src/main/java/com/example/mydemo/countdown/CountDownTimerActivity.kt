@@ -14,15 +14,20 @@ class CountDownTimerActivity : BaseActivity() {
 
     private val timeList = arrayListOf(30,40,50)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_count_down_timer)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_count_down_timer
+    }
 
+    override fun initView() {
 
         lv.adapter = CountDownAdapter(this, timeList)
 
 
 //        myCountTimer.setTime(20)
+
+    }
+
+    override fun addListener() {
 
     }
 

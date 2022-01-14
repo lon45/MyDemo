@@ -20,9 +20,11 @@ import kotlinx.android.synthetic.main.activity_mic.*
 class MicActivity : BaseActivity() {
     var visualizer: Visualizer? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mic)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_mic
+    }
+
+    override fun initView() {
 
         CollectMic.getInstance().addOnMicListener(object :
             OnMicListener {
@@ -40,6 +42,10 @@ class MicActivity : BaseActivity() {
             }
         })
 
+
+    }
+
+    override fun addListener() {
         tv_start.setOnClickListener {
             if (!Utils.isFastDoubleClick()) {
                 return@setOnClickListener

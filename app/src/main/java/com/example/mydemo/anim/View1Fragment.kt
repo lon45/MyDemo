@@ -21,14 +21,12 @@ import kotlinx.android.synthetic.main.fragment_view1.*
  */
 class View1Fragment: BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_view1,container,false)
+
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_view1
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
+    override fun initView() {
         bannerHandler = BannerHandler(activity!!)
         rtvNum.addCharOrder(CharOrder.Number)
         rtvNum.animationDuration = 500L
@@ -36,9 +34,11 @@ class View1Fragment: BaseFragment() {
         rtvNum.showCharBg = true
 
         initCommunity()
-
     }
 
+    override fun addListener() {
+
+    }
 
     override fun onResume() {
         super.onResume()
