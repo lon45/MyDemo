@@ -28,7 +28,7 @@ object Utils {
     }
 
     fun log(tag:String,msg:String){
-        Log.i(tag,msg)
+        Log.i("lxzn_$tag",msg)
     }
 
     /**

@@ -15,7 +15,7 @@
         <attr name="android:textSize" tools:ignore="ResourceName" />
         <attr name="android:textStyle" tools:ignore="ResourceName" />
 
-        <attr name="textBgColor" tools:ignore="ResourceName" />
+        <attr name="textBgColor" format="color" />
 
     </declare-styleable>
 

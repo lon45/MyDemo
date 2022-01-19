@@ -142,7 +142,7 @@ class ColorPickerView: View {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         // 画背景图片
-        canvas.drawBitmap(mBitmapBack, 0.toFloat(), 0.toFloat(), mPaint)
+        canvas.drawBitmap(mBitmapBack!!, 0.toFloat(), 0.toFloat(), mPaint)
         // 画中心小球
         canvas.drawCircle(
             mRockPosition!!.x.toFloat(), mRockPosition!!.y.toFloat(), mRudeRadius.toFloat(),

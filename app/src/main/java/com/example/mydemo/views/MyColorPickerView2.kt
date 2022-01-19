@@ -113,7 +113,7 @@ class MyColorPickerView2 : View {
     private fun drawBg(canvas: Canvas) {
 //        mBitmap = createColorWheelBitmap()
         // 画背景图片
-        canvas.drawBitmap(mBitmap, 0.toFloat(), 0.toFloat(), mPaint)
+        canvas.drawBitmap(mBitmap!!, 0.toFloat(), 0.toFloat(), mPaint)
 
     }
     /**绘制气泡**/

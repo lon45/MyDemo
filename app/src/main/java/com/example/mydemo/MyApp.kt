@@ -23,12 +23,12 @@ class MyApp : MultiDexApplication() {
             /**
              *  /storage/emulated/0/Android/data/com.app.chuanghehui/cache
              * */
-            DIR_CHE = externalCacheDir.path
+            DIR_CHE = externalCacheDir!!.path
         } else {
             /**
              *  /data/user/0/com.app.chuanghehui/cache
              * */
-            DIR_CHE = cacheDir.path
+            DIR_CHE = cacheDir!!.path
         }
 
     }

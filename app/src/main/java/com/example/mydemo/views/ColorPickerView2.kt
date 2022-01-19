@@ -234,13 +234,13 @@ class ColorPickerView2 @JvmOverloads constructor(
             mDrawingRect!!.top,
             mSatValRect!!.right + BORDER_WIDTH,
             mSatValRect!!.bottom + BORDER_WIDTH,
-            mBorderPaint
+            mBorderPaint!!
         )
 
         //组合着色器 = 明度线性着色器 + 饱和度线性着色器
         val mShader = generateSVShader()
         mSatValPaint!!.shader = mShader
-        canvas.drawRect(mSatValRect, mSatValPaint)
+        canvas.drawRect(mSatValRect!!, mSatValPaint!!)
 
         //初始化选择器的位置
         val p = satValToPoint(mSat, mVal)
@@ -250,11 +250,11 @@ class ColorPickerView2 @JvmOverloads constructor(
             p.x.toFloat(),
             p.y.toFloat(),
             mSVTrackerRadius - 1f * mDensity,
-            mSatValTrackerPaint
+            mSatValTrackerPaint!!
         )
         //绘制外圆
         mSatValTrackerPaint!!.color = -0x222223
-        canvas.drawCircle(p.x.toFloat(), p.y.toFloat(), mSVTrackerRadius, mSatValTrackerPaint)
+        canvas.drawCircle(p.x.toFloat(), p.y.toFloat(), mSVTrackerRadius, mSatValTrackerPaint!!)
     }
 
     /**
@@ -279,7 +279,7 @@ class ColorPickerView2 @JvmOverloads constructor(
         )
         //组合着色器 = 明度线性着色器 + 饱和度线性着色器
         return ComposeShader(
-            mValShader,
+            mValShader!!,
             satShader,
             PorterDuff.Mode.MULTIPLY
         )
@@ -298,7 +298,7 @@ class ColorPickerView2 @JvmOverloads constructor(
             rect.top - BORDER_WIDTH,
             rect.right + BORDER_WIDTH,
             rect.bottom + BORDER_WIDTH,
-            mBorderPaint
+            mBorderPaint!!
         )
         //初始化H线性着色器
         if (mHueShader == null) {
@@ -322,7 +322,7 @@ class ColorPickerView2 @JvmOverloads constructor(
             )
             mHuePaint!!.shader = mHueShader
         }
-        canvas.drawRect(rect, mHuePaint)
+        canvas.drawRect(rect, mHuePaint!!)
         val halfHTrackerHeight = mHTrackerHeight / 2
         //初始化H选择器选择条位置
         val p = hueToPoint(mHue)
@@ -333,7 +333,7 @@ class ColorPickerView2 @JvmOverloads constructor(
         r.bottom = p.y + halfHTrackerHeight
 
         //绘制选择条
-        canvas.drawRoundRect(r, 2f, 2f, mHueTrackerPaint)
+        canvas.drawRoundRect(r, 2f, 2f, mHueTrackerPaint!!)
     }
 
     private fun hueToPoint(hue: Float): Point {
