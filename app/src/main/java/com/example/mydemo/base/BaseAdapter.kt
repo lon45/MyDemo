@@ -16,7 +16,7 @@ abstract class BaseAdapter(mContext:Context):RecyclerView.Adapter<BaseAdapter.Vi
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 
-    val inflater = LayoutInflater.from(mContext)
+    private val inflater = LayoutInflater.from(mContext)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(getLayoutID(), parent, false)

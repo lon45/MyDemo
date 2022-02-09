@@ -1,13 +1,10 @@
 package com.example.mydemo.main
 
 import android.content.Intent
-import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mydemo.R
 import com.example.mydemo.activity.*
 import com.example.mydemo.downLoad.DownLoadActivity
-import com.example.mydemo.util.Utils
 import com.example.mydemo.countdown.CountDownTimerActivity
 import com.example.mydemo.deviceInfo.DeviceActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,8 +13,9 @@ import com.example.mydemo.coordinator_Layout.CoordinatorLayoutActivity
 import com.example.mydemo.leftscroll.LeftScrollActivity
 import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.progress.ProgressActivity
+import com.example.mydemo.util.Utils
 import com.example.mydemo.wheel.WheelActivity
-import com.smart.mylib2.TestUtils
+import com.smart.mylib2.ThirdPartyManager
 
 
 class MainActivity : BaseActivity() {
@@ -118,8 +116,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun addListener() {
-        TestUtils.getNameManager("name").setName("haha1")
-        Utils.log(TAG, TestUtils.getNameManager("name").getName())
-
+        Utils.log("", ThirdPartyManager.getUserManager().getName())
     }
 }
