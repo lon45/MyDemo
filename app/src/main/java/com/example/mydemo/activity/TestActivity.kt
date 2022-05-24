@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import com.example.mydemo.R
 import com.example.mydemo.base.BaseActivity
+import com.example.mydemo.views.GuideView
 import kotlinx.android.synthetic.main.activity_test.*
 
 /**
@@ -40,6 +41,13 @@ class TestActivity : BaseActivity() {
             tv_open.visibility = View.GONE
             ll_fg.visibility = View.GONE
         }
+
+        mGuideView.addGuideListener(object :GuideView.GuideListener{
+            override fun onDirection(direction: GuideView.Direction) {
+                Log.i("111111111111","$direction")
+            }
+
+        })
     }
 
 

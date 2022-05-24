@@ -1,5 +1,6 @@
 package com.example.mydemo.main
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mydemo.R
@@ -12,28 +13,33 @@ import com.example.mydemo.anim.AnimActivity
 import com.example.mydemo.coordinator_Layout.CoordinatorLayoutActivity
 import com.example.mydemo.leftscroll.LeftScrollActivity
 import com.example.mydemo.base.BaseActivity
+import com.example.mydemo.leftexit.LeftExitActivity
 import com.example.mydemo.progress.ProgressActivity
 import com.example.mydemo.util.Utils
 import com.example.mydemo.wheel.WheelActivity
 import com.smart.mylib2.ThirdPartyManager
+import java.io.InputStreamReader
+import java.io.LineNumberReader
 
 
 class MainActivity : BaseActivity() {
 
-    private val tabList = arrayListOf("滚轮效果","拖拽排序","左滑删除","仪表盘","进度条",
-        "倒计时","动画","下载","联动","设备","根据色值判断点击事件","验证码","颜色选择","黑白化",
-    "录音","测试")
+    private val tabList = arrayListOf(
+        "滚轮效果", "拖拽排序", "左滑删除", "仪表盘", "进度条",
+        "倒计时", "动画", "下载", "联动", "设备", "根据色值判断点击事件", "验证码", "颜色选择", "黑白化",
+        "录音", "测试", "左滑退出"
+    )
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }
 
     override fun initView() {
-        val layoutManager = GridLayoutManager(this,2)
+        val layoutManager = GridLayoutManager(this, 2)
         rv_main.layoutManager = layoutManager
-        if(rv_main.adapter == null){
-            rv_main.adapter = MainAdapter(this,tabList){
-                when(it){
+        if (rv_main.adapter == null) {
+            rv_main.adapter = MainAdapter(this, tabList) {
+                when (it) {
                     "滚轮效果" -> {
                         //滚轮
                         var intent = Intent(this@MainActivity, WheelActivity::class.java)
@@ -75,7 +81,8 @@ class MainActivity : BaseActivity() {
                         startActivity(intent)
                     }
                     "联动" -> {
-                        var intent = Intent(this@MainActivity, CoordinatorLayoutActivity::class.java)
+                        var intent =
+                            Intent(this@MainActivity, CoordinatorLayoutActivity::class.java)
                         startActivity(intent)
                     }
                     "设备" -> {
@@ -107,6 +114,10 @@ class MainActivity : BaseActivity() {
                         var intent = Intent(this@MainActivity, TestActivity::class.java)
                         startActivity(intent)
                     }
+                    "左滑退出" -> {
+                        var intent = Intent(this@MainActivity, LeftExitActivity::class.java)
+                        startActivity(intent)
+                    }
 
                 }
             }
@@ -116,6 +127,78 @@ class MainActivity : BaseActivity() {
     }
 
     override fun addListener() {
-        Utils.log("", ThirdPartyManager.getUserManager().getName())
+//        Utils.log("", ThirdPartyManager.getUserManager().getName())
+
+//        Utils.log("lxzn", getMac())
+//        Utils.log("lxzn", getProp())
+        Utils.log("lxzn_uuid", getUUid2())
+    }
+
+    fun getMac(): String {
+        var mac = ""
+        try {
+//            val process =
+//                Runtime.getRuntime().exec("cat /sys/class/net/wlan0/address")
+            val process =
+                Runtime.getRuntime().exec("cat /sys/class/net/eth0/address")
+            val ir = InputStreamReader(process.inputStream)
+            val input = LineNumberReader(ir)
+            mac = input.readLine()
+            mac = mac?.trim { it <= ' ' } ?: ""
+        } catch (e: Exception) {
+        }
+        return mac
+    }
+
+    //    private fun getProp(): String {
+//        var prop = ""
+//        try {
+//            val process =
+//                Runtime.getRuntime().exec("getprop ro.runtime.firstboot")
+//            val ir = InputStreamReader(process.inputStream)
+//            val input = LineNumberReader(ir)
+//            prop = input.readLine()
+//            prop = prop?.trim { it <= ' ' } ?: ""
+//        } catch (e: Exception) {
+//        }
+//        return prop
+//    }
+    private fun getUUid(): String {
+        var uuid = ""
+        try {
+            val process =
+                Runtime.getRuntime().exec("getprop ro.tuya.uuid")
+            val ir = InputStreamReader(process.inputStream)
+            val input = LineNumberReader(ir)
+            uuid = input.readLine()
+            uuid = uuid?.trim { it <= ' ' } ?: ""
+        } catch (e: Exception) {
+        }
+        return uuid
+    }
+
+    @SuppressLint("PrivateApi")
+    private fun getUUid2(): String {
+        var uuid = ""
+        try {
+            val clazz = Class.forName("android.os.SystemProperties")
+            val methodGet = clazz.getMethod("get", String::class.java)
+            methodGet.isAccessible = true
+            uuid = methodGet.invoke(null, "ro.tuya.uuid") as String
+        } catch (e: Exception) {
+        }
+        return uuid
+    }
+
+    fun getPorp(propName: String): String {
+        var propStr = ""
+        try {
+            val clazz = Class.forName("android.os.SystemProperties")
+            val methodGet = clazz.getMethod("get", String::class.java)
+            methodGet.isAccessible = true
+            propStr = methodGet.invoke(null, "ro.tuya.uuid") as String
+        } catch (e: Exception) {
+        }
+        return propStr
     }
 }

@@ -73,6 +73,9 @@
                 android:screenOrientation="portrait" />
         <activity android:name=".activity.MicActivity"
                 android:screenOrientation="portrait" />
+        <activity android:name=".leftexit.LeftExitActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/CommonPageTheme2"/>
     </application>
 
 </manifest>
