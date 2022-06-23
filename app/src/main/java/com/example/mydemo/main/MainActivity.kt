@@ -5,19 +5,18 @@ import android.content.Intent
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mydemo.R
 import com.example.mydemo.activity.*
-import com.example.mydemo.downLoad.DownLoadActivity
+import com.example.mydemo.anim.AnimActivity
+import com.example.mydemo.base.BaseActivity
+import com.example.mydemo.coordinator_Layout.CoordinatorLayoutActivity
 import com.example.mydemo.countdown.CountDownTimerActivity
 import com.example.mydemo.deviceInfo.DeviceActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import com.example.mydemo.anim.AnimActivity
-import com.example.mydemo.coordinator_Layout.CoordinatorLayoutActivity
-import com.example.mydemo.leftscroll.LeftScrollActivity
-import com.example.mydemo.base.BaseActivity
+import com.example.mydemo.downLoad.DownLoadActivity
 import com.example.mydemo.leftexit.LeftExitActivity
+import com.example.mydemo.leftscroll.LeftScrollActivity
 import com.example.mydemo.progress.ProgressActivity
 import com.example.mydemo.util.Utils
 import com.example.mydemo.wheel.WheelActivity
-import com.smart.mylib2.ThirdPartyManager
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.InputStreamReader
 import java.io.LineNumberReader
 
@@ -131,7 +130,8 @@ class MainActivity : BaseActivity() {
 
 //        Utils.log("lxzn", getMac())
 //        Utils.log("lxzn", getProp())
-        Utils.log("lxzn_uuid", getUUid2())
+//        Utils.log("lxzn_uuid", getUUid2())
+//        Utils.log("lxzn_KEY", getKey())
     }
 
     fun getMac(): String {
@@ -182,12 +182,33 @@ class MainActivity : BaseActivity() {
         var uuid = ""
         try {
             val clazz = Class.forName("android.os.SystemProperties")
+//            val methodSet = clazz.getMethod("set", String::class.java, String::class.java)
+//            methodSet.isAccessible = true
+//            methodSet.invoke(null, "ro.tuya.uuid","lx22f391937ad5e158a5")
+
             val methodGet = clazz.getMethod("get", String::class.java)
             methodGet.isAccessible = true
             uuid = methodGet.invoke(null, "ro.tuya.uuid") as String
         } catch (e: Exception) {
         }
         return uuid
+    }
+
+    @SuppressLint("PrivateApi")
+    private fun getKey(): String {
+        var key = ""
+        try {
+            val clazz = Class.forName("android.os.SystemProperties")
+//            val methodSet = clazz.getMethod("set", String::class.java, String::class.java)
+//            methodSet.isAccessible = true
+//            methodSet.invoke(null, "ro.tuya.key","3MSR8JYi5FbyULWS2irPYAJyhGZ8h3j6")
+
+            val methodGet = clazz.getMethod("get", String::class.java)
+            methodGet.isAccessible = true
+            key = methodGet.invoke(null, "ro.tuya.key") as String
+        } catch (e: Exception) {
+        }
+        return key
     }
 
     fun getPorp(propName: String): String {

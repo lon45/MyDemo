@@ -1,6 +1,5 @@
 package com.example.mydemo.activity
 
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
@@ -8,6 +7,9 @@ import com.example.mydemo.R
 import com.example.mydemo.base.BaseActivity
 import com.example.mydemo.views.GuideView
 import kotlinx.android.synthetic.main.activity_test.*
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.RandomAccessFile
 
 /**
  *Date: 2020/4/8
@@ -29,7 +31,33 @@ class TestActivity : BaseActivity() {
 
     }
 
+    private var open485 = true
+
+    fun writeGpio(gpio: String, value: Boolean) {
+        var file: RandomAccessFile? = null
+        try {
+            file = RandomAccessFile(gpio, "rw")
+            file.writeBytes(if (value) "1" else "0")
+            file.close()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
     override fun addListener() {
+
+        tv_485.setOnClickListener {
+            open485 = !open485
+            writeGpio("/sys/class/gpio/gpio115/value",open485)
+            if(open485){
+                tv_485.text = "开"
+            } else {
+                tv_485.text = "关"
+            }
+        }
+
         tv_open.setOnClickListener {
 
             var lp = LinearLayout.LayoutParams(
@@ -42,9 +70,9 @@ class TestActivity : BaseActivity() {
             ll_fg.visibility = View.GONE
         }
 
-        mGuideView.addGuideListener(object :GuideView.GuideListener{
+        mGuideView.addGuideListener(object : GuideView.GuideListener {
             override fun onDirection(direction: GuideView.Direction) {
-                Log.i("111111111111","$direction")
+                Log.i("111111111111", "$direction")
             }
 
         })

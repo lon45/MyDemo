@@ -16,7 +16,13 @@ android {
         multiDexEnabled true
         multiDexKeepProguard file('multidexKeep.pro')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+
     }
+
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8

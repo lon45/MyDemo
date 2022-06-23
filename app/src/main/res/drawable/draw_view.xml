@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="100dp"
+        android:height="100dp"
+        android:viewportWidth="100"
+        android:viewportHeight="100">
+    <!--正方形 H(X) V(Y)-->
+    <path
+            android:fillColor="@color/colorPrimary"
+            android:pathData="M0,0H100V100H-100Z" />
+    <!--圆环 A(r(x),r(y) Xrotation Flag1 Flag2 ENDX,ENDY-->
+    <path
+            android:pathData="M2,50 A 48,48 0 1 0 2,49.9 M2,50 L 2,49"
+            android:strokeWidth="1"
+            android:strokeColor="#ff00ff00" />
+    <!--线 L(X,Y)-->
+    <path
+            android:pathData="M0,0L100,100Z"
+            android:strokeWidth="1"
+            android:strokeColor="@color/colorAccent" />
+    <!--三次贝塞尔曲线  C(X1,Y1 X2,Y2 END_X,END_Y) -->
+    <path
+            android:pathData="M0,20 C 10,5 20,35 30,20Z"
+            android:fillColor="@color/colorAccent" />
+
+    <!--三次贝塞尔曲线  S(X,Y END_X,END_Y) -->
+    <path
+            android:pathData="M0,40 S 20,55 30,40Z"
+            android:fillColor="@color/colorAccent" />
+
+    <!--二次贝塞尔曲线 Q(X,Y END_X,END_Y) -->
+    <path
+            android:pathData="M0,60 Q 20,75 30,60Z"
+            android:fillColor="@color/colorAccent" />
+    <!--映射 T(X,Y) -->
+    <path
+            android:pathData="M0,80 Q 20,95 30,80 T 60,80Z"
+            android:fillColor="@color/colorAccent" />
+
+    <path
+            android:pathData="M5,50 H18 V95 H40 V60 H60 V95 H82 V50 H95 L50,5 L5,50"
+            android:strokeWidth="1"
+            android:strokeColor="@color/black"
+             />
+<!--    M20,20 H3 V8 H5 V-6 H4 V6 H5 V-8 H3-->
+<!--    android:fillColor="@color/black"-->
+</vector>
